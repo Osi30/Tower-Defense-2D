@@ -6,3 +6,13 @@ TextScriptImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< HEAD
+=======
+AssetOrigin:
+  serializedVersion: 1
+  productId: 231178
+  packageName: Dragon Crashers - UI Toolkit Sample project
+  packageVersion: 
+  assetPath: Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt
+  uploadId: 0
+>>>>>>> develop

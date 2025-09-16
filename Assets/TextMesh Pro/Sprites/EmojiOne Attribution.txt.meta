@@ -5,3 +5,13 @@ TextScriptImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< HEAD
+=======
+AssetOrigin:
+  serializedVersion: 1
+  productId: 231178
+  packageName: Dragon Crashers - UI Toolkit Sample project
+  packageVersion: 1.692
+  assetPath: Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt
+  uploadId: 714966
+>>>>>>> develop
