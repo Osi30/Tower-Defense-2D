@@ -6,6 +6,8 @@ TextScriptImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< HEAD
+=======
 AssetOrigin:
   serializedVersion: 1
   productId: 231178
@@ -13,3 +15,4 @@ AssetOrigin:
   packageVersion: 1.692
   assetPath: Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt
   uploadId: 714966
+>>>>>>> develop

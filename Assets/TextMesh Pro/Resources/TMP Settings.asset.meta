@@ -6,6 +6,8 @@ NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< HEAD
+=======
 AssetOrigin:
   serializedVersion: 1
   productId: 231178
@@ -13,3 +15,4 @@ AssetOrigin:
   packageVersion: 
   assetPath: Assets/TextMesh Pro/Resources/TMP Settings.asset
   uploadId: 0
+>>>>>>> develop
