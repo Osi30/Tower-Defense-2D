@@ -17,6 +17,8 @@ TrueTypeFontImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< HEAD
+=======
 AssetOrigin:
   serializedVersion: 1
   productId: 231178
@@ -24,3 +26,4 @@ AssetOrigin:
   packageVersion: 
   assetPath: Assets/TextMesh Pro/Fonts/LiberationSans.ttf
   uploadId: 0
+>>>>>>> develop
