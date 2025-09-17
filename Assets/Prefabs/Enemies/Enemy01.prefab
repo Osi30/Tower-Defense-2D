@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1770737836283058536}
   - component: {fileID: 3381970560306636227}
   - component: {fileID: 5773479540608541695}
+  - component: {fileID: 5538175961452368877}
+  - component: {fileID: 4745076157817472147}
   m_Layer: 8
   m_Name: Enemy01
   m_TagString: Enemy
@@ -28,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,7 +81,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 4292648507269747097, guid: 061206d4d8fa45945bbedf8dce0ba421, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -113,3 +115,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5538175961452368877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3127079786280815989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26f887e4bbbaaeb44b6778610c7103f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BaseAnimationControl
+  _animator: {fileID: 5773479540608541695}
+--- !u!114 &4745076157817472147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3127079786280815989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f06d33882e5b924f86c00a3e204c781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyControl
+  _wayPoints: {fileID: 11400000, guid: 7ee4f948deeb7f4498ca79baeb30069c, type: 2}
+  _enemyProperties: {fileID: 11400000, guid: d694bc4265593c04e9c3f90d02beea43, type: 2}
+  _animationControl: {fileID: 5538175961452368877}

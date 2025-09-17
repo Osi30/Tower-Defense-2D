@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: bc12bd9754a9aea4888f53f61ef1b3a9
+guid: 036463d1948dc264db17d41e56ecbf29
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3601486165279641605
-    second: U_Walk2_0
+      213: -618255924821871954
+    second: S_Walk2_Left_0
   - first:
-      213: -5504100336081620141
-    second: U_Walk2_1
+      213: -3543815309461769844
+    second: S_Walk2_Left_1
   - first:
-      213: -4527735204888146367
-    second: U_Walk2_2
+      213: 209668457303866484
+    second: S_Walk2_Left_2
   - first:
-      213: 2012993388680561760
-    second: U_Walk2_3
+      213: 944343407911683556
+    second: S_Walk2_Left_3
   - first:
-      213: -7136999737963095994
-    second: U_Walk2_4
+      213: 5412333729638837518
+    second: S_Walk2_Left_4
   - first:
-      213: 2854463727985115341
-    second: U_Walk2_5
+      213: -6173645675387873836
+    second: S_Walk2_Left_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -115,120 +115,10 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: U_Walk2_0
+      name: S_Walk2_Left_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 9
-        width: 16
-        height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5001af8f59c0bf130800000000000000
-      internalID: 3601486165279641605
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: U_Walk2_1
-      rect:
-        serializedVersion: 2
-        x: 63
-        y: 9
-        width: 18
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3533fb308e18d93b0800000000000000
-      internalID: -5504100336081620141
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: U_Walk2_2
-      rect:
-        serializedVersion: 2
-        x: 113
-        y: 9
-        width: 14
-        height: 19
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 14e8c93f1d04a21c0800000000000000
-      internalID: -4527735204888146367
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: U_Walk2_3
-      rect:
-        serializedVersion: 2
-        x: 161
-        y: 9
-        width: 14
-        height: 23
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 064c38b52d69feb10800000000000000
-      internalID: 2012993388680561760
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: U_Walk2_4
-      rect:
-        serializedVersion: 2
-        x: 209
-        y: 9
-        width: 14
-        height: 22
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 64857a04d8844fc90800000000000000
-      internalID: -7136999737963095994
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: U_Walk2_5
-      rect:
-        serializedVersion: 2
-        x: 257
+        x: 17
         y: 9
         width: 14
         height: 17
@@ -240,8 +130,118 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dc04ac213a71d9720800000000000000
-      internalID: 2854463727985115341
+      spriteID: ea236b413838b67f0800000000000000
+      internalID: -618255924821871954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: S_Walk2_Left_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 9
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c81b0f180c6d1dec0800000000000000
+      internalID: -3543815309461769844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: S_Walk2_Left_2
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 9
+        width: 14
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47c733ed954e8e200800000000000000
+      internalID: 209668457303866484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: S_Walk2_Left_3
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 9
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e5ce8e735bfa1d00800000000000000
+      internalID: 944343407911683556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: S_Walk2_Left_4
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 9
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0decf0f9d87c1b40800000000000000
+      internalID: 5412333729638837518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: S_Walk2_Left_5
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 9
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d51165b7fdc25aa0800000000000000
+      internalID: -6173645675387873836
       vertices: []
       indices: 
       edges: []
@@ -250,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3aefc58879004e947a8dbf6fa88bb0d4
+    spriteID: a17afdd39cbee8943917c9340c22fc91
     internalID: 0
     vertices: []
     indices: 
@@ -260,12 +260,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      U_Walk2_0: 3601486165279641605
-      U_Walk2_1: -5504100336081620141
-      U_Walk2_2: -4527735204888146367
-      U_Walk2_3: 2012993388680561760
-      U_Walk2_4: -7136999737963095994
-      U_Walk2_5: 2854463727985115341
+      S_Walk2_Left_0: -618255924821871954
+      S_Walk2_Left_1: -3543815309461769844
+      S_Walk2_Left_2: 209668457303866484
+      S_Walk2_Left_3: 944343407911683556
+      S_Walk2_Left_4: 5412333729638837518
+      S_Walk2_Left_5: -6173645675387873836
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
