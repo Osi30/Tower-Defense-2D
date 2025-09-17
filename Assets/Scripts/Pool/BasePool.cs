@@ -4,8 +4,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-public class BasePool<T, V>
-    where T : MonoBehaviour
+public class BasePool<V> : MonoBehaviour
     where V : BasePoolMember
 {
     [SerializeField]
