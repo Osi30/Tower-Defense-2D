@@ -4,14 +4,15 @@ public class TriggerAnimation : MonoBehaviour
 {
     [SerializeField]
     private bool isTrigger = false;
+
     [SerializeField]
-    private BaseAnimationControl control;
+    private Arrow _arrow;
 
     private void Update()
     {
         if (isTrigger)
         {
-            control.ActivateTriggerFlag(ATrigger.Attack);
+            _arrow.StartFire(Vector2.left);
             isTrigger = false;
         }
     }

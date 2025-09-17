@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c470644db0e03724aab2d0c6480a19d3, type: 3}
   m_Name: Slime
   m_EditorClassIdentifier: Assembly-CSharp::EnemyProperties
-  moveSpeed: 2
+  moveSpeed: 1.5
