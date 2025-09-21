@@ -4,15 +4,20 @@ public class TriggerAnimation : MonoBehaviour
 {
     [SerializeField]
     private bool isTrigger = false;
-    [SerializeField]
-    private BaseAnimationControl control;
 
-    private void Update()
+    [SerializeField]
+    private EnemyPool _enemyPool;
+
+    private async void Update()
     {
         if (isTrigger)
         {
-            control.ActivateTriggerFlag(ATrigger.Attack);
             isTrigger = false;
+            EnemyControl enemy = await _enemyPool.GetOneEnemy();
+            enemy.InitializeEnemy();
+            
+
+            Debug.Log("Trigger");
         }
     }
 }
