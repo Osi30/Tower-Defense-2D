@@ -53,7 +53,7 @@ public class AttackerController : MonoBehaviour
 
         // Get Arrow and Fire Target
         Vector2 direction = GetDirectionToTarget().normalized;
-        Arrow arrow = _arrowPool.GetOneActiveArrow();
+        Arrow arrow = _arrowPool.GetOneArrow();
         arrow.InitializeArrow(transform.position, direction);
         arrow.StartFire(direction);
     }

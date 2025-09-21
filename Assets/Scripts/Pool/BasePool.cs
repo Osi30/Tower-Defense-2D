@@ -18,12 +18,12 @@ public class BasePool<V> : MonoBehaviour
 
     protected StaticPool<V> _pool;
 
-    protected async void Awake()
+    protected async void Start()
     {
-        await InitPool(_poolSize, false);
+        await InitPool(_poolSize);
     }
 
-    private async Task<List<V>> InitPool(int poolSize, bool defaultState)
+    private async Task<List<V>> InitPool(int poolSize)
     {
         // Return condition
         if (_asset == null || _parent == null)
@@ -39,11 +39,11 @@ public class BasePool<V> : MonoBehaviour
         for (int i = 0; i < poolSize; i++)
         {
             // Asset Ref help for instantiate async
-            var asset = _asset.InstantiateAsync(_parent).Task;
-            await asset;
+            var asset = _asset.InstantiateAsync(_parent);
+            await asset.Task;
 
-            // Set asset isActive 
-            asset.Result.SetActive(defaultState);
+            // Set default state is false
+            asset.Result.SetActive(false);
 
             var member = asset.Result.GetComponent<V>();
             _pool.Add(member);
@@ -53,7 +53,7 @@ public class BasePool<V> : MonoBehaviour
         return poolMembers;
     }
 
-    protected async Task<List<V>> GetPoolElements(int number, bool isActive)
+    protected async Task<List<V>> GetPoolElements(int number)
     {
         List<V> elementList = new();
 
@@ -61,7 +61,7 @@ public class BasePool<V> : MonoBehaviour
         int missingNumber = 0;
         for (int i = 0; i < number; i++)
         {
-            V element = GetOneElement();
+            V element = _pool.GetInactiveElement();
 
             if (element == null) missingNumber++;
 
@@ -71,18 +71,10 @@ public class BasePool<V> : MonoBehaviour
         // Init more if there is no inactive elements
         if (missingNumber > 0)
         {
-            elementList.AddRange(await InitPool(missingNumber, isActive));
+            elementList.AddRange(await InitPool(missingNumber));
         }
 
         return elementList;
-    }
-
-    // Get Pool Elements
-    protected V GetOneElement()
-    {
-        V inactiveElement = _pool.GetInactiveElement();
-        inactiveElement?.MarkAsActive();
-        return inactiveElement;
     }
 
     // Force inactivate all elements

@@ -144,7 +144,7 @@ Transform:
   m_GameObject: {fileID: 48665535}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -28.11, y: 2.97, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -366,7 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e1dae5dd4da2746bff736f262ef4e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPool
-  _poolSize: 0
+  _poolSize: 2
   _asset:
     m_AssetGUID: 2da35b8d41ebc6a46b6baa13b51b3ad9
     m_SubObjectName: 

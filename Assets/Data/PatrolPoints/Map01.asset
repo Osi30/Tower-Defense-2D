@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Map01
   m_EditorClassIdentifier: Assembly-CSharp::MapPatrolWayPoints
   _waypoints:
+  - position: {x: -13.35, y: 4.01}
+    nearByRadius: 2.21
   - position: {x: 5.43, y: 4.01}
     nearByRadius: 2.21
   - position: {x: 5.46, y: -8.85}
