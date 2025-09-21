@@ -6,14 +6,18 @@ public class TriggerAnimation : MonoBehaviour
     private bool isTrigger = false;
 
     [SerializeField]
-    private Arrow _arrow;
+    private EnemyPool _enemyPool;
 
-    private void Update()
+    private async void Update()
     {
         if (isTrigger)
         {
-            _arrow.StartFire(Vector2.left);
             isTrigger = false;
+            EnemyControl enemy = await _enemyPool.GetOneEnemy();
+            enemy.InitializeEnemy();
+            
+
+            Debug.Log("Trigger");
         }
     }
 }

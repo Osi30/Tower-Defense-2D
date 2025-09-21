@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3761229583735092129}
   m_Layer: 9
   m_Name: Arrow01
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -157,3 +157,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Arrow
   _fireSpeed: 10
   _lifeTime: 5
+  _damage: 1
+  _enemyMask:
+    serializedVersion: 2
+    m_Bits: 256
+  _damageRadius: 0.35

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class BasePoolMember : MonoBehaviour, IBasePoolMember
 {
+    [SerializeField]
     private bool isUsed = false;
 
     public bool IsActive => isUsed && gameObject.activeSelf;

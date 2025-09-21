@@ -10,13 +10,13 @@ public class ArrowPool : BasePool<Arrow>
     /// <param name="number"></param>
     /// <param name="isActive"></param>
     /// <returns></returns>
-    public async Task<List<Arrow>> GetArrows(int number, bool isActive)
+    public async Task<List<Arrow>> GetArrows(int number)
     {
-        return await base.GetPoolElements(number, isActive);
+        return await base.GetPoolElements(number);
     }
 
-    public Arrow GetOneActiveArrow()
+    public Arrow GetOneArrow()
     {
-        return GetArrows(1, true).Result.First();
+        return GetArrows(1).Result.First();
     }
 }

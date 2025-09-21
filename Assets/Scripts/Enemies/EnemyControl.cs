@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
 
-public class EnemyControl : MonoBehaviour
+public class EnemyControl : BasePoolMember
 {
     [SerializeField]
     private MapPatrolWayPoints _wayPoints;
@@ -13,32 +14,63 @@ public class EnemyControl : MonoBehaviour
 
     private Vector2 _targetPosition;
     private int _currentPositionIndex = 0;
+    private Coroutine _patrolCoroutine;
 
-    private void Awake()
+    private void OnDisable()
     {
+        if (_patrolCoroutine != null) 
+            StopCoroutine(_patrolCoroutine);
+    }
+
+    private IEnumerator Patrol()
+    {
+        while (true)
+        {
+            // 1. Move toward point
+            transform.position = Vector2.MoveTowards(transform.position, _targetPosition, _enemyProperties.moveSpeed * Time.deltaTime);
+
+            if (IsArriveTargetPosition())
+            {
+                if (!IsArriveEndPoition())
+                {
+                    // 2. Still not arrive to end position
+                    UpdateTargetPosition();
+                    UpdateMovementAnimation(GetDirectionToTarget().normalized);
+                }
+                else
+                {
+                    // 3. Arrive to end position
+                    break;
+                }
+            }
+
+            yield return null;
+        }
+
+        MarkAsInactive();
+    }
+
+    #region Pool Member Setup
+
+    public void InitializeEnemy()
+    {
+        MarkAsActive();
+
+        // Poistion
+        UpdateTargetPosition();
+        transform.position = _targetPosition;
+
+        // Target Patrol Points
         UpdateTargetPosition();
         UpdateMovementAnimation(GetDirectionToTarget().normalized);
+
+        // Start Patrol
+        _patrolCoroutine = StartCoroutine(Patrol());
     }
 
-    private void LateUpdate()
-    {
-        transform.position = Vector2.MoveTowards(transform.position, _targetPosition, _enemyProperties.moveSpeed * Time.deltaTime);
+    #endregion
 
-        if (IsArriveTargetPosition())
-        {
-            if (!IsArriveEndPoition())
-            {
-                // Still not arrive to end position
-                UpdateTargetPosition();
-                UpdateMovementAnimation(GetDirectionToTarget().normalized);
-            }
-            else
-            {
-                // Arrive to end position
-                gameObject.SetActive(false);
-            }
-        }
-    }
+    #region Patrol Way Points Movement
 
     public void UpdateTargetPosition()
     {
@@ -68,4 +100,6 @@ public class EnemyControl : MonoBehaviour
         _animationControl.ActivateFloatFlag(AFloat.WalkX, direction.x);
         _animationControl.ActivateFloatFlag(AFloat.WalkY, direction.y);
     }
+
+    #endregion
 }
