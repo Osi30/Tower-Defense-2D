@@ -12,8 +12,6 @@ public class AttackerController : MonoBehaviour
     [SerializeField]
     private BaseAnimationControl _animationControl;
 
-   
-
     private Transform _target;
     private ArrowPool _arrowPool;
     private bool _isCooldown;
@@ -33,6 +31,12 @@ public class AttackerController : MonoBehaviour
         // Attack Target
         else
         {
+            if (!_target.gameObject.activeSelf)
+            {
+                _target = null;
+                return;
+            }
+
             if (!_isCooldown)
             {
                 _animationControl.ActivateTriggerFlag(ATrigger.Attack);
@@ -90,7 +94,7 @@ public class AttackerController : MonoBehaviour
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, _attackRadius, (Vector2)transform.position, 0f, _enemyMask);
 
         // Something Hit Attack Range
-        if (hit.collider != null) _target = hit.collider.transform;
+        if (hit.collider != null && hit.collider.gameObject.activeSelf) _target = hit.collider.transform;
     }
 
     private void OnDrawGizmos()

@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1175714187635760042}
   - component: {fileID: 5670457265299757087}
   - component: {fileID: 8300269534248175917}
+  - component: {fileID: 1690835010116320819}
+  - component: {fileID: 4537150428594902368}
   m_Layer: 6
   m_Name: Attacker03
   m_TagString: Attacker
@@ -127,3 +129,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseAnimationControl
   _animator: {fileID: 5670457265299757087}
+--- !u!114 &1690835010116320819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5203088882371720502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c8f327bc1b9c048876c8b7c62e4e2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackerController
+  _attackRadius: 11.5
+  _attackCoolDownTime: 0.9
+  _enemyMask:
+    serializedVersion: 2
+    m_Bits: 256
+  _animationControl: {fileID: 8300269534248175917}
+--- !u!114 &4537150428594902368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5203088882371720502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36892cd98aa232f478aa935c58496c97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackerSignal
+  _controller: {fileID: 1690835010116320819}
