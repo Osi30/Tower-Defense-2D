@@ -1,6 +1,4 @@
-﻿
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Assets.Scripts.LevelManagement.Dtos;
 using UnityEngine;
@@ -22,9 +20,9 @@ namespace Assets.Scripts.LevelManagement
 
         public async Task Initialize(Spawnpoint spawnpoint)
         {
-            _delayAtFirstTime = spawnpoint.DelayAtFirstTime;
-            _delayEachSpawn = spawnpoint.DelayEachSpawn;
-            _spawns = spawnpoint.Spawns;
+            _delayAtFirstTime = spawnpoint.delayAtFirstTime;
+            _delayEachSpawn = spawnpoint.delayEachSpawn;
+            _spawns = spawnpoint.spawns;
 
             // Start to Spawn
             //_spawnCoroutine = StartCoroutine(Spawn(_delayAtFirstTime));
@@ -40,9 +38,9 @@ namespace Assets.Scripts.LevelManagement
             // Spawn
             Spawn spawn = _spawns[_currentSpawn];
             int spawnNumber = 0;
-            string enemyType = spawn.EnemyType;
+            string enemyType = spawn.enemyType;
 
-            while (spawnNumber != spawn.EnemyNumber)
+            while (spawnNumber != spawn.enemyNumber)
             {
                 // Call the enemy pool base on enemy type
                 InitializeEnemyAsync();

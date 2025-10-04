@@ -1,4 +1,5 @@
 using System.Collections;
+using Assets.Scripts.LevelManagement.UI;
 using UnityEngine;
 
 public class EnemyControl : BasePoolMember
@@ -14,6 +15,9 @@ public class EnemyControl : BasePoolMember
 
     [SerializeField]
     private Health _health;
+
+    [SerializeField]
+    private UILevel _level;
 
     private Vector2 _targetPosition;
     private int _currentPositionIndex = 0;
@@ -116,6 +120,7 @@ public class EnemyControl : BasePoolMember
     public void OnDeath()
     {
         // Some animation before death
+
 
         // Deactive
         MarkAsInactive();

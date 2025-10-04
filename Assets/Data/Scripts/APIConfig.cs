@@ -4,16 +4,16 @@ using UnityEngine;
 public class APIConfig : ScriptableObject
 {
     [SerializeField] 
-    private string baseUrl;
+    private string _baseUrl;
     [SerializeField] 
-    private string loginEndpoint;
+    private string _getLevelByLevel;
 
-    public string BaseUrl => baseUrl;
-    public string LoginEndpoint => loginEndpoint;
+    public string BaseUrl => _baseUrl;
+    public string GetLevelByLevel => _baseUrl + _getLevelByLevel;
 
-    public void SetData(string newBaseUrl, string newLoginEndpoint)
+    public void SetData(string newBaseUrl, string getLvelByLevel)
     {
-        baseUrl = newBaseUrl;
-        loginEndpoint = newLoginEndpoint;
+        _baseUrl = newBaseUrl;
+        _getLevelByLevel = getLvelByLevel;
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Assets.Scripts.LevelManagement.Dtos;
 using Assets.Scripts.LevelManagement.UI;
@@ -32,9 +31,9 @@ namespace Assets.Scripts.LevelManagement
         private void MockLevel()
         {
             LevelData levelData = new();
-            levelData.Level = 1;
-            levelData.Coin = 1500;
-            levelData.Heart = 15;
+            levelData.level = 1;
+            levelData.coin = 1500;
+            levelData.heart = 15;
 
             List<WaveData> waveDatas = new List<WaveData>();
 
@@ -43,8 +42,8 @@ namespace Assets.Scripts.LevelManagement
 
             waveDatas.Add(new WaveData()
             {
-                WaveLevel = 1,
-                TotalEnemy = 20
+                waveLevel = 1,
+                totalEnemy = 20
             });
         }
 
@@ -62,10 +61,10 @@ namespace Assets.Scripts.LevelManagement
         private async Task SpawnEnemy()
         {
             // Start Spawn System
-            WaveData waveData = _levelData.WaveDatas[_currentLevel];
-            _currentEnemy = waveData.TotalEnemy;
+            WaveData waveData = _levelData.waves[_currentLevel];
+            _currentEnemy = waveData.totalEnemy;
 
-            List<Spawnpoint> spawnpoints = waveData.Spawnpoints;
+            List<Spawnpoint> spawnpoints = waveData.spawnpoints;
             for (int i = 0; i < spawnpoints.Count - 1; i++)
             {
                 await _spawnManagers[i].Initialize(spawnpoints[i]);
@@ -74,7 +73,7 @@ namespace Assets.Scripts.LevelManagement
             // After Spawn
             _currentLevel++;
 
-            if (_currentLevel > _levelData.WaveDatas.Count - 1)
+            if (_currentLevel > _levelData.waves.Count - 1)
             {
                 // End Level
 
