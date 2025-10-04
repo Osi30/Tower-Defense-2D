@@ -1,4 +1,8 @@
 ﻿public enum AFloat
 {
-    IdleF
+    IdleF,
+    DirX,
+    DirY,
+    WalkX,
+    WalkY,
 }

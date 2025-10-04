@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Attacker
   - Tower
+  - Enemy
+  - Arrow
+  - ArrowPool
   layers:
   - Default
   - TransparentFX
@@ -15,8 +18,8 @@ TagManager:
   - UI
   - Attacker
   - Tower
-  - 
-  - 
+  - Enemy
+  - Arrow
   - 
   - 
   - 
@@ -54,6 +57,14 @@ TagManager:
     locked: 0
   - name: Top
     uniqueID: 1430066691
+  - name: Tower
+    uniqueID: 2869753029
+    locked: 0
+  - name: Attacker
+    uniqueID: 123539529
+    locked: 0
+  - name: Arrow
+    uniqueID: 980727543
     locked: 0
   m_RenderingLayers:
   - Default

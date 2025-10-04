@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DefaultSelectionTower
   m_EditorClassIdentifier: Assembly-CSharp::DefenseTowerData
   _towerPrefabs:
-  - {fileID: 2175469939212606281, guid: eb12b91aae19abd4da346752a7028809, type: 3}
+  - {fileID: 8112870333128219157, guid: be7df6fd058fa6e42b29852ce1d38b67, type: 3}
   - {fileID: 427001714467239016, guid: 4df29e9672a4a0e49ac1060cc2b7c1f0, type: 3}
   - {fileID: 1190819397420697086, guid: d6f6494b07053f84e9c767d44ece7210, type: 3}

@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Tower Datas
+/// </summary>
+
 [CreateAssetMenu(fileName = "Default Towers", menuName = "Tower/Default")]
 public class DefenseTowerData : ScriptableObject
 {
