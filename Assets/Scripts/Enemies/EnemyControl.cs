@@ -1,14 +1,17 @@
 using System.Collections;
-using Assets.Scripts.LevelManagement.UI;
 using UnityEngine;
 
 public class EnemyControl : BasePoolMember
 {
-    [SerializeField]
-    private MapPatrolWayPoints _wayPoints;
+    public delegate void OnEnemyEvent(string enemyType);
+    public OnEnemyEvent OnEnemyArrive;
+    public OnEnemyEvent OnEnemyDefeated;
 
     [SerializeField]
-    private EnemyProperties _enemyProperties;
+    private string _enemyType;
+
+    [SerializeField]
+    private float _moveSpeed;
 
     [SerializeField]
     private BaseAnimationControl _animationControl;
@@ -16,8 +19,8 @@ public class EnemyControl : BasePoolMember
     [SerializeField]
     private Health _health;
 
-    [SerializeField]
-    private UILevel _level;
+    private MapPatrolWayPoints _wayPoints;
+    public void SetWayPoints(MapPatrolWayPoints wayPoints) => _wayPoints = wayPoints;
 
     private Vector2 _targetPosition;
     private int _currentPositionIndex = 0;
@@ -39,7 +42,7 @@ public class EnemyControl : BasePoolMember
         while (true)
         {
             // 1. Move toward point
-            transform.position = Vector2.MoveTowards(transform.position, _targetPosition, _enemyProperties.moveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, _targetPosition, _moveSpeed * Time.deltaTime);
 
             if (IsArriveTargetPosition())
             {
@@ -52,6 +55,7 @@ public class EnemyControl : BasePoolMember
                 else
                 {
                     // 3. Arrive to end position
+                    Arrive();
                     break;
                 }
             }
@@ -115,7 +119,7 @@ public class EnemyControl : BasePoolMember
 
     #endregion
 
-    #region Health
+    #region Death & Arrive
 
     public void OnDeath()
     {
@@ -125,11 +129,14 @@ public class EnemyControl : BasePoolMember
         // Deactive
         MarkAsInactive();
 
-        // Add point
+        OnEnemyDefeated.Invoke(_enemyType);
 
+    }
 
-        // Add coin
-
+    public void Arrive()
+    {
+        OnEnemyArrive.Invoke(_enemyType);
+        MarkAsInactive();
     }
 
     #endregion

@@ -12,16 +12,15 @@ namespace Assets.Scripts.LevelManagement.UI
         private TextMeshProUGUI _heart;
 
         [SerializeField]
-        private TextMeshProUGUI _point;
-
-        [SerializeField]
         private TextMeshProUGUI _coin;
 
         [SerializeField]
         private TextMeshProUGUI _waveLevel;
 
+        private int _point;
+
         public void UpdateHeart(int heart) => _heart.text = (int.Parse(_heart.text) + heart).ToString();
-        public void UpdatePoint(int point) => _point.text = (int.Parse(_point.text) + point).ToString();
+        public void UpdatePoint(int point) => _point += point;
         public void UpdateCoin(int coin)
         {
             int updatedCoin = int.Parse(_coin.text) + coin;
@@ -36,8 +35,7 @@ namespace Assets.Scripts.LevelManagement.UI
         {
             _heart.text = levelData.heart.ToString();
             _coin.text = levelData.coin.ToString();
-            _point.text = "0";
-            _waveLevel.text = "0";
+            _waveLevel.text = "1";
         }
 
     }

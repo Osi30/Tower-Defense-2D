@@ -390,7 +390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyControl
   isUsed: 0
   _wayPoints: {fileID: 11400000, guid: 7ee4f948deeb7f4498ca79baeb30069c, type: 2}
-  _enemyProperties: {fileID: 11400000, guid: c9da61a7b1d2c9e4b8c9fd43c375ae83, type: 2}
+  _moveSpeed: 2
   _animationControl: {fileID: 6131854997433645622}
   _health: {fileID: 8420424539455662286}
 --- !u!1 &6148270098880837624

@@ -1,74 +1,89 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Assets.Scripts.LevelManagement.Dtos;
+using Assets.Scripts.Pool.Enemies;
 using UnityEngine;
 
 namespace Assets.Scripts.LevelManagement
 {
     public class SpawnManager : MonoBehaviour
     {
+        public delegate void OnEnemyEvent(string enemyType);
+        public OnEnemyEvent OnDefeatedEvent;
+        public OnEnemyEvent OnArriveEvent;
+
         [SerializeField]
         private float _delayEachEnemy = 0.1f;
         [SerializeField]
-        private EnemyPool _enemyPool;
+        private MapPatrolWayPoints _wayPoints;
+        [SerializeField]
+        private EnemyPoolControl _enemyPoolControl;
 
         private int _currentSpawn = 0;
         private float _delayAtFirstTime = 0f;
         private float _delayEachSpawn = 0f;
         private List<Spawn> _spawns = new();
-        //private Coroutine _spawnCoroutine;
 
-        public async Task Initialize(Spawnpoint spawnpoint)
+        public void Initialize(Spawnpoint spawnpoint)
         {
             _delayAtFirstTime = spawnpoint.delayAtFirstTime;
             _delayEachSpawn = spawnpoint.delayEachSpawn;
             _spawns = spawnpoint.spawns;
 
             // Start to Spawn
-            //_spawnCoroutine = StartCoroutine(Spawn(_delayAtFirstTime));
-            await Spawn(_delayAtFirstTime);
+            Spawn(_delayAtFirstTime);
         }
 
-        private async Task Spawn(float delayTime = 0f)
+        private async void Spawn(float delayTime = 0f)
         {
             // Delay Time Before Spawn
-            //yield return new WaitForSeconds(delayTime);
             await Task.Delay((int)(delayTime * 1000));
 
             // Spawn
             Spawn spawn = _spawns[_currentSpawn];
             int spawnNumber = 0;
-            string enemyType = spawn.enemyType;
 
-            while (spawnNumber != spawn.enemyNumber)
+            while (spawnNumber < spawn.enemyNumber)
             {
                 // Call the enemy pool base on enemy type
-                InitializeEnemyAsync();
-                //yield return new WaitForSeconds(_delayEachEnemy);
+                await InitializeEnemyAsync(spawn.enemyType);
                 await Task.Delay((int)(_delayEachEnemy * 1000));
+                spawnNumber++;
             }
 
             // Continue to next Spawn
             _currentSpawn++;
-            if (_currentSpawn == _spawns.Count - 1)
+            if (_currentSpawn == _spawns.Count)
             {
                 // End Spawn
                 return;
             }
 
-            //_spawnCoroutine = StartCoroutine(Spawn(_delayEachSpawn));
-            await Spawn(_delayEachSpawn);
+            Spawn(_delayEachSpawn);
         }
 
-        private async void InitializeEnemyAsync()
+        /// <summary>
+        /// Get enemy from pool, set up way points and events
+        /// </summary>
+        /// <param name="enemyType"></param>
+        /// <returns></returns>
+        private async Task InitializeEnemyAsync(string enemyType)
         {
-            EnemyControl enemy = await _enemyPool.GetOneEnemy();
+            EnemyControl enemy = await _enemyPoolControl.GetEnemyPool(enemyType).GetOneEnemy();
+            enemy.SetWayPoints(_wayPoints);
+            enemy.OnEnemyDefeated += OnEnemyDefeated;
+            enemy.OnEnemyArrive += OnEnemyArrive;
             enemy.InitializeEnemy();
         }
 
-        //private void OnDisable()
-        //{
-        //    StopCoroutine(_spawnCoroutine);
-        //}
+        private void OnEnemyDefeated(string enemyType)
+        {
+            OnDefeatedEvent.Invoke(enemyType);
+        }
+
+        private void OnEnemyArrive(string enemyType)
+        {
+            OnArriveEvent.Invoke(enemyType);
+        }
     }
 }

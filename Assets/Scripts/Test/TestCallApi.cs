@@ -22,7 +22,7 @@ namespace Assets.Scripts.Test
 
         private async Task Call()
         {
-            await api.GetGameLevelByLevelt(1);
+            await api.GetGameLevelByLevel(1);
         }
     }
 }
