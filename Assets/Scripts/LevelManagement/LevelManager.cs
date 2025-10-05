@@ -37,6 +37,7 @@ namespace Assets.Scripts.LevelManagement
             if (levelData == null)
             {
                 // End Level
+                return;
             }
 
             _levelData = levelData;

@@ -8,13 +8,14 @@ public class Arrow : BasePoolMember
     [SerializeField]
     private float _lifeTime = 2f;
     [SerializeField]
-    private int _damage = 1;
-    [SerializeField]
     private LayerMask _enemyMask;
     [SerializeField]
     private float _damageRadius = 1f;
 
     private Coroutine _fireCoroutine;
+    private int _damage = 1;
+
+    public void SetDamage(int damage) => _damage = damage;
 
     private void OnDisable()
     {

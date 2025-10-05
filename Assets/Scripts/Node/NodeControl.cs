@@ -17,6 +17,8 @@ public class NodeControl : OpenPanel
 
     public async void ChooseTower(int id)
     {
+        Debug.Log("Choose");
+
         // Close Node
         _placeToChoose.SetActive(false);
         CloseChoicePanel();
@@ -25,8 +27,15 @@ public class NodeControl : OpenPanel
         await InstantiateTower(id);
     }
 
+    public void BuyTower(int coin)
+    {
+        _uiLevel.UpdateCoin(-coin);
+    }
+
     private async Task InstantiateTower(int id)
     {
+        Debug.Log("Instantiate");
+
         var tower = _defenseTowerData.GetTowerById(id).InstantiateAsync(_parent);
         await tower.Task;
 

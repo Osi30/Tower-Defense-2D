@@ -6,6 +6,8 @@ public class AttackerController : MonoBehaviour
     [SerializeField]
     private float _attackRadius;
     [SerializeField]
+    private int _attackDamage;
+    [SerializeField]
     private float _attackCoolDownTime;
     [SerializeField]
     private LayerMask _enemyMask;
@@ -58,6 +60,7 @@ public class AttackerController : MonoBehaviour
         // Get Arrow and Fire Target
         Vector2 direction = GetDirectionToTarget().normalized;
         Arrow arrow = _arrowPool.GetOneArrow();
+        arrow.SetDamage(_attackDamage);
         arrow.InitializeArrow(transform.position, direction);
         arrow.StartFire(direction);
     }
