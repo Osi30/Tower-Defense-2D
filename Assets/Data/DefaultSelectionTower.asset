@@ -13,6 +13,33 @@ MonoBehaviour:
   m_Name: DefaultSelectionTower
   m_EditorClassIdentifier: Assembly-CSharp::DefenseTowerData
   _towerPrefabs:
-  - {fileID: 8112870333128219157, guid: be7df6fd058fa6e42b29852ce1d38b67, type: 3}
-  - {fileID: 427001714467239016, guid: 4df29e9672a4a0e49ac1060cc2b7c1f0, type: 3}
-  - {fileID: 1190819397420697086, guid: d6f6494b07053f84e9c767d44ece7210, type: 3}
+  - m_AssetGUID: be7df6fd058fa6e42b29852ce1d38b67
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 19c2c35d30b715649a8e7ea781c1b1e1
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: d9a21fff7efc8ba49a74609dffc6684a
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 6a266a20cc855914d88b872f670d4128
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 14b31f4647bd02c4aa29b321059c59e8
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 94ac78847b78f694f9618f35d79e61fe
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
