@@ -904,10 +904,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelMapManagerWorld
   nodes:
   - {fileID: 387323168}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2130239057}
+  - {fileID: 493569922}
+  - {fileID: 1684027622}
+  - {fileID: 223448229}
 --- !u!4 &1883756773
 Transform:
   m_ObjectHideFlags: 0
