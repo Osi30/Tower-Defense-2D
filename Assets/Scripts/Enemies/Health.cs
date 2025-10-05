@@ -19,6 +19,12 @@ public class Health : MonoBehaviour
         _currentHealth = _maxHealth;
     }
 
+    public void ResetHealth()
+    {
+        _healthFill.fillAmount = 1f;
+        _currentHealth = _maxHealth;
+    }
+
     public void TakeDamage(int damage)
     {
         _currentHealth -= damage;

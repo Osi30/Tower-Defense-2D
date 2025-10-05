@@ -63,12 +63,13 @@ namespace Assets.Scripts.LevelManagement
             if (_currentLevel == _levelData.waves.Count)
             {
                 // End Level
-
+                return;
             }
 
             // Start Spawn System
             WaveData waveData = _levelData.waves[_currentLevel];
             _currentEnemy = waveData.totalEnemy;
+            _uiLevel.UpdateWaveLevel(waveData.waveLevel);
 
             List<Spawnpoint> spawnpoints = waveData.spawnpoints;
             for (int i = 0; i < spawnpoints.Count; i++)
@@ -82,6 +83,35 @@ namespace Assets.Scripts.LevelManagement
 
         public void OnEnemyDefeated(string enemyType)
         {
+            _currentEnemy--;
+
+            int addCoin = 0;
+
+            switch (enemyType)
+            {
+                case "Slime":
+                    addCoin = 50;
+                    break;
+                case "Goblin":
+                    addCoin = 75;
+                    break;
+                default:
+                    addCoin = 100;
+                    break;
+            }
+
+            _uiLevel.UpdateCoin(addCoin);
+
+            if (_currentEnemy <= 0)
+            {
+                // Start Next Wave
+                SpawnEnemy();
+            }
+        }
+
+        public void OnEnemyArrive(string enemyType)
+        {
+            _uiLevel.UpdateHeart(-1);
             _currentEnemy--;
 
             switch (enemyType)
@@ -98,21 +128,6 @@ namespace Assets.Scripts.LevelManagement
             {
                 // Start Next Wave
                 SpawnEnemy();
-            }
-        }
-
-        public void OnEnemyArrive(string enemyType)
-        {
-            _uiLevel.UpdateHeart(-1);
-
-            switch (enemyType)
-            {
-                case "Slime":
-                    break;
-                case "Goblin":
-                    break;
-                default:
-                    break;
             }
         }
 

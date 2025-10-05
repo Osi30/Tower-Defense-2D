@@ -70,6 +70,10 @@ public class EnemyControl : BasePoolMember
 
     public void InitializeEnemy()
     {
+        _currentPositionIndex = 0;
+        _targetPosition = Vector2.zero;
+        _health.ResetHealth();
+
         MarkAsActive();
 
         // Poistion
@@ -124,13 +128,14 @@ public class EnemyControl : BasePoolMember
     public void OnDeath()
     {
         // Some animation before death
+        _animationControl.ActivateTriggerFlag(ATrigger.Death);
+    }
 
-
-        // Deactive
+    public void Death()
+    {
+        StopCoroutine(_patrolCoroutine);
         MarkAsInactive();
-
         OnEnemyDefeated.Invoke(_enemyType);
-
     }
 
     public void Arrive()

@@ -56,6 +56,7 @@ namespace Assets.Scripts.LevelManagement
             if (_currentSpawn == _spawns.Count)
             {
                 // End Spawn
+                _currentSpawn = 0;
                 return;
             }
 

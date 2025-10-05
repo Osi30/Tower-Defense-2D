@@ -143,6 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttackerController
   _attackRadius: 7
   _attackDamage: 1
+  _attackSpeed: 1
   _attackCoolDownTime: 1
   _enemyMask:
     serializedVersion: 2
