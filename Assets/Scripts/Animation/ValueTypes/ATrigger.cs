@@ -1,4 +1,5 @@
 ﻿public enum ATrigger
 {
-    Attack
+    Attack,
+    Death
 }
