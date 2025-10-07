@@ -19,7 +19,7 @@ public class LevelMapManagerWorld : MonoBehaviour
             int idx = i + 1;
             bool unlocked = idx <= maxU;
             int stars = SaveSystem.GetStars(idx);
-            nodes[i].Setup(idx, unlocked, stars, OnClickLevel);
+            nodes[i].Setup(idx, unlocked, stars);
         }
     }
 
