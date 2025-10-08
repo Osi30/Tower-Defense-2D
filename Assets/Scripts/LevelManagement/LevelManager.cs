@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Assets.Scripts.LevelManagement.Dtos;
 using Assets.Scripts.LevelManagement.UI;
 using Assets.Scripts.Security;
@@ -18,9 +20,11 @@ namespace Assets.Scripts.LevelManagement
         private APICaller _apiCaller;
         [SerializeField]
         private LevelData _levelData;
+        [SerializeField]
+        private NodeControl[] _towerPlaces;
 
 
-        private int _currentLevel = 0;
+        private int _currentWaveLevel = 0;
         private int _currentEnemy;
         private bool _isLoading = true;
 
@@ -37,15 +41,58 @@ namespace Assets.Scripts.LevelManagement
             if (levelData == null)
             {
                 // End Level
+                Debug.Log("Level Data is Null");
                 return;
             }
 
+            // Update Game Progress (if any)
+            GameProgress gameProgress = GameManager.Instance.UserData.gameProgress;
+            if (gameProgress != null && gameProgress.waveId != 0)
+            {
+                RemovePlayedWave(levelData);
+                UpdateGameProgress(gameProgress.towerplaces);
+                _uiLevel.Initialize(gameProgress);
+            }
+            else
+            {
+                _uiLevel.Initialize(levelData);
+            }
+
             _levelData = levelData;
-            _uiLevel.Initialize(levelData);
+
 
             _isLoading = false;
 
             SpawnEnemy();
+        }
+
+        private void RemovePlayedWave(LevelData levelData)
+        {
+            List<WaveData> waves = levelData.waves;
+            int currentWaveId = GameManager.Instance.UserData.gameProgress.waveId;
+
+            if (currentWaveId == 0) return;
+
+            for (int i = 0; i < levelData.waves.Count; i++)
+            {
+                if (waves[i].id == currentWaveId)
+                {
+                    break;
+                }
+                else
+                {
+                    levelData.waves.RemoveAt(i);
+                }
+            }
+        }
+
+        private void UpdateGameProgress(List<TowerPlace> towerPlaces)
+        {
+            for (int i = 0; i < _towerPlaces.Length; i++)
+            {
+                if (towerPlaces[i].towerType != -1)
+                    _towerPlaces[i].ApplyTower(towerPlaces[i].towerType);
+            }
         }
 
         private void InitializeEvents()
@@ -60,14 +107,21 @@ namespace Assets.Scripts.LevelManagement
 
         private void SpawnEnemy()
         {
-            if (_currentLevel == _levelData.waves.Count)
+            if (_currentWaveLevel == _levelData.waves.Count)
             {
                 // End Level
                 return;
             }
 
             // Start Spawn System
-            WaveData waveData = _levelData.waves[_currentLevel];
+            WaveData waveData = _levelData.waves[_currentWaveLevel];
+
+            // Update Progress
+            if (_currentWaveLevel != 0)
+            {
+                UpdateGameProgress(waveData.id);
+            }
+
             _currentEnemy = waveData.totalEnemy;
             _uiLevel.UpdateWaveLevel(waveData.waveLevel);
 
@@ -78,7 +132,42 @@ namespace Assets.Scripts.LevelManagement
             }
 
             // After Spawn
-            _currentLevel++;
+            _currentWaveLevel++;
+        }
+
+        private async void UpdateGameProgress(int waveId)
+        {
+            List<TowerPlace> towerPlaces = new();
+            for (int i = 0; i < _towerPlaces.Length; i++)
+            {
+                towerPlaces.Add(new TowerPlace()
+                {
+                    node = i + 1,
+                    towerType = _towerPlaces[i].GetTowerType
+                });
+            }
+
+            GameProgress gameProgress = new()
+            {
+                currentCoin = _uiLevel.GetCoin,
+                currentHeart = _uiLevel.GetHeart,
+                customerId = GameManager.Instance.UserData.id,
+                waveId = waveId,
+                currentPoint = 0,
+                towerplaces = towerPlaces
+            };
+            var result = await APICaller.Instance.UpdateGameProgress(gameProgress);
+
+            // Update Successfully
+            if (result)
+            {
+                Debug.Log("Update Success");
+            }
+            // Update Failed
+            else
+            {
+                Debug.Log("Update Fail");
+            }
         }
 
         public void OnEnemyDefeated(string enemyType)

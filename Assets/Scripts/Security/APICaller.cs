@@ -12,9 +12,26 @@ namespace Assets.Scripts.Security
     /// </summary>
     public class APICaller : MonoBehaviour
     {
-        // ================================
-        // 1️⃣ GET: /api/GameLevel/{level}
-        // ================================
+        public static APICaller Instance;
+
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        /// <summary>
+        /// GET: /api/GameLevel/{level}
+        /// </summary>
+        /// <param name="level"></param>
+        /// <returns></returns>
         public async Task<LevelData> GetGameLevelByLevel(int level)
         {
             string fullUrl = BuildConstants.PRODUCTION_URL + "/api/GameLevel/" + level.ToString();
@@ -43,12 +60,14 @@ namespace Assets.Scripts.Security
             return null;
         }
 
-        // ========================================
-        // 2️⃣ GET: /api/GameLevel/wave/{waveLevel}
-        // ========================================
-        public async Task<LevelData[]> GetLevelByWaveLevel(int waveLevel)
+        /// <summary>
+        /// GET: /api/GameLevel/wave/{waveLevel}
+        /// </summary>
+        /// <param name="waveId"></param>
+        /// <returns></returns>
+        public async Task<int> GetLevelByWaveId(int waveId)
         {
-            string fullUrl = BuildConstants.PRODUCTION_URL + "/api/GameLevel/wave/" + waveLevel.ToString();
+            string fullUrl = BuildConstants.PRODUCTION_URL + "/api/GameLevel/wave/" + waveId.ToString();
 
             UnityWebRequest webRequest = UnityWebRequest.Get(fullUrl);
             await webRequest.SendWebRequest();
@@ -58,8 +77,7 @@ namespace Assets.Scripts.Security
                 string jsonResponse = webRequest.downloadHandler.text;
                 try
                 {
-                    // JsonUtility không parse được mảng -> dùng JsonHelper
-                    return JsonHelper.FromJson<LevelData>(jsonResponse);
+                    return int.Parse(jsonResponse);
                 }
                 catch (Exception e)
                 {
@@ -71,20 +89,25 @@ namespace Assets.Scripts.Security
                 Debug.LogError("Request failed: " + webRequest.error);
             }
 
-            return null;
+            return 0;
         }
 
-        // ================================
-        // 3️⃣ PUT: /api/GameProgress
-        // ================================
-        public async Task<bool> UpdateGameProgress(string jsonBody)
+        /// <summary>
+        /// PUT: /api/GameProgress
+        /// </summary>
+        /// <param name="jsonBody"></param>
+        /// <returns></returns>
+        public async Task<bool> UpdateGameProgress(GameProgress gameProgress)
         {
             string fullUrl = BuildConstants.PRODUCTION_URL + "/api/GameProgress";
-
-            UnityWebRequest webRequest = new UnityWebRequest(fullUrl, "PUT");
+            string jsonBody = JsonUtility.ToJson(gameProgress);
             byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonBody);
-            webRequest.uploadHandler = new UploadHandlerRaw(bodyRaw);
-            webRequest.downloadHandler = new DownloadHandlerBuffer();
+
+            UnityWebRequest webRequest = new(fullUrl, "PUT")
+            {
+                uploadHandler = new UploadHandlerRaw(bodyRaw),
+                downloadHandler = new DownloadHandlerBuffer()
+            };
             webRequest.SetRequestHeader("Content-Type", "application/json");
 
             await webRequest.SendWebRequest();

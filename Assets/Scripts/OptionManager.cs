@@ -5,51 +5,48 @@ using UnityEngine.Audio;
 public class OptionManager : MonoBehaviour
 {
     [Header("Audio")]   
-    public AudioMixer audioMixer; // Dùng để chỉnh volume
-    public Slider masterVolumeSlider;
+    public AudioMixer audioMixer;
     public Toggle musicToggle;
     public Toggle sfxToggle;
-    public GameObject mainMenuPanel; // Main Menu Panel
 
     [Header("Graphics")]
     public Toggle fullscreenToggle;
 
-    void Start()
-    {
-        // Kiểm tra null trước khi sử dụng các thành phần UI
-        if (masterVolumeSlider == null || fullscreenToggle == null)
-        {
-            Debug.LogError("⚠️ UI components are not assigned in the Inspector.");
-            return;
-        }
+    //void Start()
+    //{
+    //    // Kiểm tra null trước khi sử dụng các thành phần UI
+    //    if (fullscreenToggle == null)
+    //    {
+    //        Debug.LogError("⚠️ UI components are not assigned in the Inspector.");
+    //        return;
+    //    }
 
-        // Load settings (nếu có PlayerPrefs)
-        if (PlayerPrefs.HasKey("MasterVolume"))
-        {
-            float vol = PlayerPrefs.GetFloat("MasterVolume");
-            masterVolumeSlider.value = vol;
-            SetMasterVolume(vol);
-        }
-        else
-        {
-            Debug.Log("No saved MasterVolume found. Using default value.");
-        }
+    //    // Load settings (nếu có PlayerPrefs)
+    //    if (PlayerPrefs.HasKey("MasterVolume"))
+    //    {
+    //        float vol = PlayerPrefs.GetFloat("MasterVolume");
+    //        SetMasterVolume(vol);
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("No saved MasterVolume found. Using default value.");
+    //    }
 
-        fullscreenToggle.isOn = Screen.fullScreen;
-    }
+    //    fullscreenToggle.isOn = Screen.fullScreen;
+    //}
 
-    public void SetMasterVolume(float volume)
-    {
-        if (audioMixer == null)
-        {
-            Debug.LogError("⚠️ AudioMixer is not assigned in the Inspector.");
-            return;
-        }
+    //public void SetMasterVolume(float volume)
+    //{
+    //    if (audioMixer == null)
+    //    {
+    //        Debug.LogError("⚠️ AudioMixer is not assigned in the Inspector.");
+    //        return;
+    //    }
 
-        audioMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20); // dB
-        PlayerPrefs.SetFloat("MasterVolume", volume);
-        Debug.Log($"Master volume set to {volume}");
-    }
+    //    audioMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20); // dB
+    //    PlayerPrefs.SetFloat("MasterVolume", volume);
+    //    Debug.Log($"Master volume set to {volume}");
+    //}
 
     public void ToggleMusic(bool isOn)
     {

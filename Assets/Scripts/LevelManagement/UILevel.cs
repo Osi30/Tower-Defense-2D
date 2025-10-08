@@ -19,6 +19,26 @@ namespace Assets.Scripts.LevelManagement.UI
 
         private int _point;
 
+        public int GetCoin => int.Parse(_coin.text);
+        public int GetHeart => int.Parse(_heart.text);
+
+        public void Initialize(LevelData levelData)
+        {
+            _heart.text = levelData.heart.ToString();
+            _coin.text = levelData.coin.ToString();
+
+            if (levelData.waves == null || levelData.waves.Count == 0)
+                _waveLevel.text = "1";
+            else
+                _waveLevel.text = levelData.waves[0].waveLevel.ToString();
+        }
+
+        public void Initialize(GameProgress gameProgress)
+        {
+            _heart.text = gameProgress.currentHeart.ToString();
+            _coin.text = gameProgress.currentCoin.ToString();
+        }
+
         public bool IsEnoughCoin(int coin)
         {
             if (int.TryParse(_coin.text, out int currentCoin))
@@ -40,13 +60,6 @@ namespace Assets.Scripts.LevelManagement.UI
         }
 
         public void UpdateWaveLevel(int waveLevel) => _waveLevel.text = waveLevel.ToString();
-
-        public void Initialize(LevelData levelData)
-        {
-            _heart.text = levelData.heart.ToString();
-            _coin.text = levelData.coin.ToString();
-            _waveLevel.text = "1";
-        }
 
     }
 }

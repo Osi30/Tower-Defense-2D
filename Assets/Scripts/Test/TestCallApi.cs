@@ -16,13 +16,13 @@ namespace Assets.Scripts.Test
 
         private async void Start()
         {
-            Debug.Log("Call");
             await Call();
         }
 
         private async Task Call()
         {
-            await api.GetLevelByWaveLevel(1);
+            int level = await api.GetLevelByWaveId(1);
+            Debug.Log("Level: " + level);
         }
     }
 }

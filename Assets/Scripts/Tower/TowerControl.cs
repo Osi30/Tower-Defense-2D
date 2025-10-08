@@ -17,7 +17,7 @@ namespace Assets.Scripts.Tower
         private TextMeshProUGUI _sellCoinText;
 
         public delegate void OnSold(int coin = 0);
-        public delegate Task OnUpgrade(int id, int coin = 0);
+        public delegate Task<bool> OnUpgrade(int id, int coin = 0);
 
         public OnSold OnSoldEvent;
 
@@ -31,9 +31,13 @@ namespace Assets.Scripts.Tower
 
         public async void Upgrade(int id)
         {
-            CloseChoicePanel();
-            await OnUpgradeEvent.Invoke(id, -_upgradeCoin);
-            Destroy(gameObject);
+            bool result = await OnUpgradeEvent.Invoke(id, -_upgradeCoin);
+
+            if (result)
+            {
+                CloseChoicePanel();
+                Destroy(gameObject);
+            }
         }
 
         public void Sold()
