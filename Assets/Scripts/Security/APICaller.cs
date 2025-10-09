@@ -124,17 +124,22 @@ namespace Assets.Scripts.Security
             }
         }
 
-        // ================================
-        // 4️⃣ PUT: /api/Inventory
-        // ================================
-        public async Task<bool> UpdateInventory(string jsonBody)
+        /// <summary>
+        /// PUT: /api/Inventory
+        /// </summary>
+        /// <param name="jsonBody"></param>
+        /// <returns></returns>
+        public async Task<bool> UpdateInventory(Inventory inventory)
         {
             string fullUrl = BuildConstants.PRODUCTION_URL + "/api/Inventory";
-
-            UnityWebRequest webRequest = new UnityWebRequest(fullUrl, "PUT");
+            string jsonBody = JsonUtility.ToJson(inventory);
             byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonBody);
-            webRequest.uploadHandler = new UploadHandlerRaw(bodyRaw);
-            webRequest.downloadHandler = new DownloadHandlerBuffer();
+
+            UnityWebRequest webRequest = new(fullUrl, "PUT")
+            {
+                uploadHandler = new UploadHandlerRaw(bodyRaw),
+                downloadHandler = new DownloadHandlerBuffer()
+            };
             webRequest.SetRequestHeader("Content-Type", "application/json");
 
             await webRequest.SendWebRequest();
@@ -151,17 +156,22 @@ namespace Assets.Scripts.Security
             }
         }
 
-        // ================================
-        // 5️⃣ POST: /api/ResultLevel
-        // ================================
-        public async Task<bool> CreateResultLevel(string jsonBody)
+        /// <summary>
+        /// POST: /api/ResultLevel
+        /// </summary>
+        /// <param name="resultLevel"></param>
+        /// <returns></returns>
+        public async Task<bool> CreateResultLevel(ResultLevel resultLevel)
         {
             string fullUrl = BuildConstants.PRODUCTION_URL + "/api/ResultLevel";
-
-            UnityWebRequest webRequest = new UnityWebRequest(fullUrl, "POST");
+            string jsonBody = JsonUtility.ToJson(resultLevel);
             byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonBody);
-            webRequest.uploadHandler = new UploadHandlerRaw(bodyRaw);
-            webRequest.downloadHandler = new DownloadHandlerBuffer();
+
+            UnityWebRequest webRequest = new(fullUrl, "POST")
+            {
+                uploadHandler = new UploadHandlerRaw(bodyRaw),
+                downloadHandler = new DownloadHandlerBuffer()
+            };
             webRequest.SetRequestHeader("Content-Type", "application/json");
 
             await webRequest.SendWebRequest();

@@ -1,0 +1,45 @@
+﻿using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Assets.Scripts.UI
+{
+    public class EndUI : OpenPanel
+    {
+        [SerializeField]
+        private TextMeshProUGUI _resultText;
+        [SerializeField]
+        private TextMeshProUGUI _pointText;
+        [SerializeField]
+        private TextMeshProUGUI _thunderSkillText;
+        [SerializeField]
+        private TextMeshProUGUI _boomSkillText;
+        [SerializeField]
+        private Image[] _stars;
+        [SerializeField]
+        private Sprite _starOn;
+
+        public void LoadHome()
+        {
+            SceneController.LoadRoadMap();
+        }
+
+        public void Restart()
+        {
+            SceneController.Restart();
+        }
+
+        public void InitPanel(string result, int point, int stars, int thunderSkill, int boomSkill)
+        {
+            _resultText.text = result;  
+            _pointText.text = point.ToString();
+            _thunderSkillText.text = "x" + thunderSkill.ToString();
+            _boomSkillText.text = "x" + boomSkill.ToString();
+
+            for (int i = 0; i < stars; i++)
+            {
+                _stars[i].sprite = _starOn;
+            }
+        }
+    }
+}

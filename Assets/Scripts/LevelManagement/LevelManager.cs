@@ -1,30 +1,34 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Assets.Scripts.LevelManagement.Dtos;
 using Assets.Scripts.LevelManagement.UI;
 using Assets.Scripts.Security;
+using Assets.Scripts.UI;
 using UnityEngine;
 
 namespace Assets.Scripts.LevelManagement
 {
     public class LevelManager : MonoBehaviour
     {
+        [Header("Level")]
         [SerializeField]
         private int _level;
         [SerializeField]
-        private UILevel _uiLevel;
-        [SerializeField]
         private SpawnManager[] _spawnManagers;
-        [SerializeField]
-        private APICaller _apiCaller;
         [SerializeField]
         private LevelData _levelData;
         [SerializeField]
         private NodeControl[] _towerPlaces;
 
+        [Header("UI")]
+        [SerializeField]
+        private UILevel _uiLevel;
+        [SerializeField]
+        private EndUI _endUI;
+
 
         private int _currentWaveLevel = 0;
+
+        [SerializeField]
         private int _currentEnemy;
         private bool _isLoading = true;
 
@@ -36,7 +40,7 @@ namespace Assets.Scripts.LevelManagement
             InitializeEvents();
 
             // Call Api to Get LevelData By Level
-            var levelData = await _apiCaller.GetGameLevelByLevel(_level);
+            var levelData = await APICaller.Instance.GetGameLevelByLevel(_level);
 
             if (levelData == null)
             {
@@ -110,6 +114,8 @@ namespace Assets.Scripts.LevelManagement
             if (_currentWaveLevel == _levelData.waves.Count)
             {
                 // End Level
+                Debug.Log("End Level");
+                WinGameLevel();
                 return;
             }
 
@@ -213,6 +219,13 @@ namespace Assets.Scripts.LevelManagement
                     break;
             }
 
+            if (_uiLevel.GetHeart == 0)
+            {
+                // Lose Game Level
+                LoseGameLevel();
+                return;
+            }
+
             if (_currentEnemy <= 0)
             {
                 // Start Next Wave
@@ -220,6 +233,82 @@ namespace Assets.Scripts.LevelManagement
             }
         }
 
+        private void WinGameLevel()
+        {
+            Debug.Log("Win");
 
+            UserData userData = GameManager.Instance.UserData;
+
+            // Result after game
+            ResultLevel result = new()
+            {
+                customerId = userData.id,
+                star = _uiLevel.GetHeart / (_levelData.heart / 3),
+                point = 0,
+                gameLevelId = _level
+            };
+
+            // Reward after game
+            Inventory inventory = userData.inventory;
+            inventory.customerId = userData.id;
+            inventory.upgradePoint += 10;
+
+            int thunderSkill = Random.Range(0, 3);
+            int boomSkill = Random.Range(0, 3);
+
+            inventory.thunderSkill += thunderSkill;
+            inventory.boomSkill += boomSkill;
+
+            // Update
+            UpdateResultLevel(result);
+            UpdateInventory(inventory);
+            _endUI.OpenChoicePanel();
+            _endUI.InitPanel("VICTORY", result.point, result.star, thunderSkill, boomSkill);
+        }
+
+        private void LoseGameLevel()
+        {
+            UserData userData = GameManager.Instance.UserData;
+
+            // Result after game
+            ResultLevel result = new()
+            {
+                customerId = userData.id,
+                star = 0,
+                point = 0,
+                gameLevelId = 0
+            };
+
+            // Inventory after game
+            Inventory inventory = userData.inventory;
+            inventory.customerId = userData.id;
+            // need to update the thunderskill and boom skill here
+
+            UpdateResultLevel(result);
+            UpdateInventory(inventory);
+
+            _endUI.OpenChoicePanel();
+            _endUI.InitPanel("GAMEOVER", 0, 0, 0, 0);
+        }
+
+        private async void UpdateResultLevel(ResultLevel result)
+        {
+            bool isSuccess = await APICaller.Instance.CreateResultLevel(result);
+
+            if (isSuccess)
+            {
+                GameManager.Instance.UserData.resultLevels.Add(result);
+            }
+        }
+
+        private async void UpdateInventory(Inventory inventory)
+        {
+            bool result = await APICaller.Instance.UpdateInventory(inventory);
+
+            if (result)
+            {
+                GameManager.Instance.UserData.inventory = inventory;
+            }
+        }
     }
 }

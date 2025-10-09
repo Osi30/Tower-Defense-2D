@@ -8,6 +8,11 @@ public static class SceneController
         SceneManager.LoadScene(sceneIndex);
     }
 
+    public static void LoadRoadMap()
+    {
+        SceneManager.LoadScene(1);
+    }
+
     public static void Restart()
     {
         LoadScene(SceneManager.GetActiveScene().buildIndex);

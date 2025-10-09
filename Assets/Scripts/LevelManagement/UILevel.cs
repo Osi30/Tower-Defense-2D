@@ -1,6 +1,7 @@
 ﻿
 
 using Assets.Scripts.LevelManagement.Dtos;
+using Assets.Scripts.UI;
 using TMPro;
 using UnityEngine;
 
@@ -37,6 +38,7 @@ namespace Assets.Scripts.LevelManagement.UI
         {
             _heart.text = gameProgress.currentHeart.ToString();
             _coin.text = gameProgress.currentCoin.ToString();
+            _point = gameProgress.currentPoint;
         }
 
         public bool IsEnoughCoin(int coin)
@@ -49,6 +51,8 @@ namespace Assets.Scripts.LevelManagement.UI
             return false;
         }
 
+        #region Update Fields
+
         public void UpdateHeart(int heart) => _heart.text = (int.Parse(_heart.text) + heart).ToString();
         public void UpdatePoint(int point) => _point += point;
         public void UpdateCoin(int coin)
@@ -58,8 +62,8 @@ namespace Assets.Scripts.LevelManagement.UI
 
             _coin.text = updatedCoin.ToString();
         }
-
         public void UpdateWaveLevel(int waveLevel) => _waveLevel.text = waveLevel.ToString();
 
+        #endregion
     }
 }

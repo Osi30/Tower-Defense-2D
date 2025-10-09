@@ -24,6 +24,7 @@ namespace Assets.Scripts.LevelManagement.Dtos
         public int attackSpeed;
         public int damage;
         public int range;
+        public int customerId;
     }
 
     [System.Serializable]
@@ -43,7 +44,9 @@ namespace Assets.Scripts.LevelManagement.Dtos
     {
         public int id;
         public int star;
+        public int point;
         public int gameLevelId;
+        public int customerId;
     }
 
     [System.Serializable]

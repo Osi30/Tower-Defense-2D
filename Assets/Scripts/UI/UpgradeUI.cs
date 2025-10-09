@@ -1,0 +1,124 @@
+﻿
+
+using Assets.Scripts.LevelManagement.Dtos;
+using Assets.Scripts.Security;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Assets.Scripts.UI
+{
+    public class UpgradeUI : OpenPanel
+    {
+        [SerializeField]
+        private TextMeshProUGUI _upgradePointText;
+        [SerializeField]
+        private Image _attackSpeed;
+        [SerializeField]
+        private Image _range;
+        [SerializeField]
+        private Image _damage;
+
+        private Inventory _initInventory;
+        private Inventory _currentInventory;
+
+        public void InitializePanel()
+        {
+            var inventory = GameManager.Instance.UserData.inventory;
+
+            _initInventory = new Inventory
+            {
+                upgradePoint = inventory.upgradePoint,
+                attackSpeed = inventory.attackSpeed,
+                range = inventory.range,
+                damage = inventory.damage,
+            };
+            _currentInventory = new Inventory
+            {
+                upgradePoint = inventory.upgradePoint,
+                attackSpeed = inventory.attackSpeed,
+                range = inventory.range,
+                damage = inventory.damage,
+            };
+            UpdateTechnique(_currentInventory);
+        }
+
+        private void UpdateTechnique(Inventory inventory)
+        {
+            _upgradePointText.text = inventory.upgradePoint.ToString();
+            _attackSpeed.fillAmount = inventory.attackSpeed / 10f;
+            _range.fillAmount = inventory.range / 10f;
+            _damage.fillAmount = inventory.damage / 10f;
+        }
+
+        public void ResetInventory()
+        {
+            _currentInventory.upgradePoint = _initInventory.upgradePoint;
+            _currentInventory.range = _initInventory.range;
+            _currentInventory.damage = _initInventory.damage;
+            _currentInventory.attackSpeed = _initInventory.attackSpeed;
+            UpdateTechnique(_currentInventory);
+        }
+
+        public void AddTechnique(string technique)
+        {
+            if (_currentInventory.upgradePoint == 0)
+            {
+                return;
+            }
+
+            switch (technique)
+            {
+                case "AttackSpeed":
+                    if (_currentInventory.attackSpeed < 10)
+                    {
+                        _currentInventory.attackSpeed++;
+                        _currentInventory.upgradePoint--;
+                    }
+                    break;
+                case "Range":
+                    if (_currentInventory.range < 10)
+                    {
+                        _currentInventory.range++;
+                        _currentInventory.upgradePoint--;
+                    }
+                    break;
+                default:
+                    if (_currentInventory.damage < 10)
+                    {
+                        _currentInventory.damage++;
+                        _currentInventory.upgradePoint--;
+                    }
+                    break;
+            }
+
+            UpdateTechnique(_currentInventory);
+        }
+
+        public async void Save()
+        {
+            var userData = GameManager.Instance.UserData;
+
+            var inventory = userData.inventory;
+            inventory.customerId = userData.id;
+            inventory.range = _currentInventory.range;
+            inventory.damage = _currentInventory.damage;
+            inventory.attackSpeed = _currentInventory.attackSpeed;
+            inventory.upgradePoint = _currentInventory.upgradePoint;
+
+            var result = await APICaller.Instance.UpdateInventory(inventory);
+            if (result)
+            {
+                GameManager.Instance.UserData.inventory = _currentInventory;
+            }
+        }
+
+    }
+
+    public enum Technique
+    {
+        AttackSpeed,
+        Range,
+        Damage
+    }
+}
