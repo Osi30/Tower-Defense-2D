@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 /// <summary>
 /// Tower Datas
@@ -8,9 +9,9 @@ using UnityEngine;
 public class DefenseTowerData : ScriptableObject
 {
     [SerializeField]
-    private GameObject[] _towerPrefabs;
+    private AssetReference[] _towerPrefabs;
 
-    public GameObject GetTowerById(int id)
+    public AssetReference GetTowerById(int id)
     {
         return _towerPrefabs[id];
     }

@@ -1255,7 +1255,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -60}
   m_SizeDelta: {x: 500, y: 430}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &267438157
@@ -1675,6 +1675,7 @@ GameObject:
   - component: {fileID: 293199972}
   - component: {fileID: 293199974}
   - component: {fileID: 293199973}
+  - component: {fileID: 293199975}
   m_Layer: 5
   m_Name: AuthPanel
   m_TagString: Untagged
@@ -1742,6 +1743,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 293199971}
   m_CullTransparentMesh: 1
+--- !u!114 &293199975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293199971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7186de6cc9f1a884b899603f51acd6b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AuthManager
+  choicePanel: {fileID: 0}
+  loginFormPanel: {fileID: 0}
+  registerFormPanel: {fileID: 0}
+  inputLoginUsername: {fileID: 285251137}
+  inputLoginPassword: {fileID: 2075087206}
+  inputRegisterUsername: {fileID: 1818159425}
+  inputRegisterPassword: {fileID: 1249063856}
+  inputRegisterConfirmPassword: {fileID: 1631831931}
+  mainMenuManager: {fileID: 0}
 --- !u!1 &297608641
 GameObject:
   m_ObjectHideFlags: 0
@@ -8749,7 +8771,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -100}
   m_SizeDelta: {x: 400, y: 520}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1981321403

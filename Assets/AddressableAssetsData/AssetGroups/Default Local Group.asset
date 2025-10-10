@@ -15,6 +15,21 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 970aa64dc92bf15438fda4f0f5c31aac
   m_SerializeEntries:
+  - m_GUID: 10bca23f33a9f26468b1607e063550ce
+    m_Address: Assets/Prefabs/Enemies/Enemy03.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 14b31f4647bd02c4aa29b321059c59e8
+    m_Address: Assets/Prefabs/Attacker_Towers/Tower_Attacker03.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 19c2c35d30b715649a8e7ea781c1b1e1
+    m_Address: Assets/Prefabs/Attacker_Towers/Tower_Attacker02.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2da35b8d41ebc6a46b6baa13b51b3ad9
     m_Address: Assets/Prefabs/Enemies/Enemy01.prefab
     m_ReadOnly: 0
@@ -25,8 +40,33 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a266a20cc855914d88b872f670d4128
+    m_Address: Assets/Prefabs/Attacker_Towers/Tower_Attacker02_Upgrade.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6f4b0a967b70d0943b53851452c88919
     m_Address: Assets/Scripts/Test/GameObject.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 94ac78847b78f694f9618f35d79e61fe
+    m_Address: Assets/Prefabs/Attacker_Towers/Tower_Attacker03_Upgrade.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d75cfbe5b677c440802987c72581f0d
+    m_Address: Assets/Prefabs/Enemies/Enemy02.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: be7df6fd058fa6e42b29852ce1d38b67
+    m_Address: Assets/Prefabs/Attacker_Towers/Tower_Attacker01.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d9a21fff7efc8ba49a74609dffc6684a
+    m_Address: Assets/Prefabs/Attacker_Towers/Tower_Attacker02.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
