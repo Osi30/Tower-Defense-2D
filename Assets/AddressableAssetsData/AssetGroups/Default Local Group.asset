@@ -45,11 +45,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6f4b0a967b70d0943b53851452c88919
-    m_Address: Assets/Scripts/Test/GameObject.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 94ac78847b78f694f9618f35d79e61fe
     m_Address: Assets/Prefabs/Attacker_Towers/Tower_Attacker03_Upgrade.prefab
     m_ReadOnly: 0
