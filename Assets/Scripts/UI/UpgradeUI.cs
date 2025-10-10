@@ -73,7 +73,7 @@ namespace Assets.Scripts.UI
 
         public void AddTechnique(string technique)
         {
-            if (_currentInventory.upgradePoint == 0)
+            if (_currentInventory.upgradePoint <= 0)
             {
                 return;
             }
@@ -115,7 +115,7 @@ namespace Assets.Scripts.UI
             inventory.range = _currentInventory.range;
             inventory.damage = _currentInventory.damage;
             inventory.attackSpeed = _currentInventory.attackSpeed;
-            inventory.upgradePoint = _currentInventory.upgradePoint;
+            inventory.upgradePoint = _currentInventory.range + _currentInventory.damage + _currentInventory.attackSpeed;
 
             var result = await APICaller.Instance.UpdateInventory(inventory);
             if (result)
