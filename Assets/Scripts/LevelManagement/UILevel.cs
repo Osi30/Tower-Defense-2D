@@ -1,7 +1,6 @@
 ﻿
 
 using Assets.Scripts.LevelManagement.Dtos;
-using Assets.Scripts.UI;
 using TMPro;
 using UnityEngine;
 
@@ -45,7 +44,7 @@ namespace Assets.Scripts.LevelManagement.UI
         {
             if (int.TryParse(_coin.text, out int currentCoin))
             {
-                return currentCoin >= coin;
+                return currentCoin >= Mathf.Abs(coin);
             }
 
             return false;

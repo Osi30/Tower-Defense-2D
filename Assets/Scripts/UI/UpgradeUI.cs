@@ -13,11 +13,16 @@ namespace Assets.Scripts.UI
         [SerializeField]
         private TextMeshProUGUI _upgradePointText;
         [SerializeField]
+        private TextMeshProUGUI _thunderSkill;
+        [SerializeField]
+        private TextMeshProUGUI _boomSkill;
+        [SerializeField]
         private Image _attackSpeed;
         [SerializeField]
         private Image _range;
         [SerializeField]
         private Image _damage;
+
 
         private Inventory _initInventory;
         private Inventory _currentInventory;
@@ -32,6 +37,8 @@ namespace Assets.Scripts.UI
                 attackSpeed = inventory.attackSpeed,
                 range = inventory.range,
                 damage = inventory.damage,
+                thunderSkill = inventory.thunderSkill,
+                boomSkill = inventory.boomSkill,
             };
             _currentInventory = new Inventory
             {
@@ -39,6 +46,8 @@ namespace Assets.Scripts.UI
                 attackSpeed = inventory.attackSpeed,
                 range = inventory.range,
                 damage = inventory.damage,
+                thunderSkill = inventory.thunderSkill,
+                boomSkill = inventory.boomSkill,
             };
             UpdateTechnique(_currentInventory);
         }
@@ -46,6 +55,8 @@ namespace Assets.Scripts.UI
         private void UpdateTechnique(Inventory inventory)
         {
             _upgradePointText.text = inventory.upgradePoint.ToString();
+            _thunderSkill.text = "x" + inventory.thunderSkill.ToString();
+            _boomSkill.text = "x" + inventory.boomSkill.ToString();
             _attackSpeed.fillAmount = inventory.attackSpeed / 10f;
             _range.fillAmount = inventory.range / 10f;
             _damage.fillAmount = inventory.damage / 10f;

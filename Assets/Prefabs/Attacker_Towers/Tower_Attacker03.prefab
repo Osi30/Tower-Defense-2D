@@ -224,7 +224,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5508961590146702092}
         m_TargetAssemblyTypeName: Assets.Scripts.Tower.TowerControl, Assembly-CSharp
-        m_MethodName: OpenChoicePanel
+        m_MethodName: SetActivePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -259,12 +259,24 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4908840301313642729, guid: d9a21fff7efc8ba49a74609dffc6684a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908840301313642729, guid: d9a21fff7efc8ba49a74609dffc6684a, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.13
       objectReference: {fileID: 0}
     - target: {fileID: 4920276735075159071, guid: d9a21fff7efc8ba49a74609dffc6684a, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5030032371649456690, guid: d9a21fff7efc8ba49a74609dffc6684a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5196245674445471024, guid: d9a21fff7efc8ba49a74609dffc6684a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 7243404100109985759, guid: d9a21fff7efc8ba49a74609dffc6684a, type: 3}
       propertyPath: m_Alpha

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts.LevelManagement.Dtos;
 using Assets.Scripts.LevelManagement.UI;
 using Assets.Scripts.Security;
@@ -126,6 +127,11 @@ namespace Assets.Scripts.LevelManagement
             if (_currentWaveLevel != 0)
             {
                 UpdateGameProgress(waveData.id);
+
+                var userData = GameManager.Instance.UserData;
+                var inventory = userData.inventory;
+                inventory.customerId = userData.id;
+                UpdateInventory(inventory);
             }
 
             _currentEnemy = waveData.totalEnemy;
@@ -236,6 +242,7 @@ namespace Assets.Scripts.LevelManagement
         private void WinGameLevel()
         {
             Debug.Log("Win");
+            APICaller.Instance.DeleteGameProgress();
 
             UserData userData = GameManager.Instance.UserData;
 
@@ -251,7 +258,14 @@ namespace Assets.Scripts.LevelManagement
             // Reward after game
             Inventory inventory = userData.inventory;
             inventory.customerId = userData.id;
-            inventory.upgradePoint += 10;
+
+            var results = GameManager.Instance.UserData.resultLevels;
+            var existedResult = results.FirstOrDefault(r => r.gameLevelId == result.gameLevelId);
+            // First time win
+            if (existedResult == null)
+            {
+                inventory.upgradePoint += 10;
+            }
 
             int thunderSkill = Random.Range(0, 3);
             int boomSkill = Random.Range(0, 3);
@@ -268,6 +282,8 @@ namespace Assets.Scripts.LevelManagement
 
         private void LoseGameLevel()
         {
+            APICaller.Instance.DeleteGameProgress();
+
             UserData userData = GameManager.Instance.UserData;
 
             // Result after game
@@ -295,9 +311,23 @@ namespace Assets.Scripts.LevelManagement
         {
             bool isSuccess = await APICaller.Instance.CreateResultLevel(result);
 
-            if (isSuccess)
+            // For Delete Result Level
+            if (isSuccess && result.gameLevelId != 0)
             {
-                GameManager.Instance.UserData.resultLevels.Add(result);
+                var results = GameManager.Instance.UserData.resultLevels;
+                var existedResult = results.FirstOrDefault(r => r.gameLevelId == result.gameLevelId);
+
+                // For Update Result Level
+                if (existedResult != null)
+                {
+                    existedResult.star = result.star;
+                    existedResult.point = result.point;
+                }
+                // For Create new Result Level
+                else
+                {
+                    results.Add(result);
+                }
             }
         }
 

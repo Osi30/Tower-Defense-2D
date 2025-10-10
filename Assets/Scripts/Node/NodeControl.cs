@@ -14,15 +14,11 @@ public class NodeControl : OpenPanel
     private DefenseTowerData _defenseTowerData;
     [SerializeField]
     private Transform _parent;
+    [SerializeField]
+    private int[] _towerCoin = { 500, 650, 750 };
 
     private int _towerType = -1;
     public int GetTowerType => _towerType;
-
-    public void ChooseTower(int id)
-    {
-        Debug.Log("Choose");
-        _towerType = id;
-    }
 
     public async void ApplyTower(int id)
     {
@@ -34,22 +30,17 @@ public class NodeControl : OpenPanel
         await InstantiateTower(id);
     }
 
-    public void BuyTower(int coin)
+    public void BuyTower(int id)
     {
         Debug.Log("Buy");
+        int coinId = id == 0 ? id : id / 2;
+        int coin = _towerCoin[coinId];
 
-        while (_towerType == -1)
-        {
-
-        }
         if (_uiLevel.IsEnoughCoin(coin))
         {
             _uiLevel.UpdateCoin(-coin);
-            ApplyTower(_towerType);
-        }
-        else
-        {
-            _towerType = -1;
+            _towerType = id;
+            ApplyTower(id);
         }
     }
 
@@ -67,6 +58,8 @@ public class NodeControl : OpenPanel
 
         // Setup Event (Upgrade / Sold)
         var control = towerGO.GetComponent<TowerControl>();
+        control.UpgradeCanvas.overrideSorting = true;
+        control.UpgradeCanvas.sortingOrder = 2;
         control.OnSoldEvent += OnSoleTower;
         control.OnUpgradeEvent += OnUpgradeTower;
     }

@@ -187,6 +187,16 @@ namespace Assets.Scripts.Security
                 return false;
             }
         }
+
+        public async void DeleteGameProgress()
+        {
+            var userData = GameManager.Instance.UserData;
+            var progress = userData.gameProgress;
+            progress.waveId = 0;
+            progress.customerId = userData.id;
+
+            await UpdateGameProgress(progress);
+        }
     }
 
     // Helper parse JSON array (vì JsonUtility chỉ parse object)

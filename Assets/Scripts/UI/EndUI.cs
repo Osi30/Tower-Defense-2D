@@ -22,11 +22,13 @@ namespace Assets.Scripts.UI
         public void LoadHome()
         {
             SceneController.LoadRoadMap();
+            Time.timeScale = 1f;
         }
 
         public void Restart()
         {
             SceneController.Restart();
+            Time.timeScale = 1f;
         }
 
         public void InitPanel(string result, int point, int stars, int thunderSkill, int boomSkill)
@@ -40,6 +42,7 @@ namespace Assets.Scripts.UI
             {
                 _stars[i].sprite = _starOn;
             }
+            Time.timeScale = 0f;
         }
     }
 }

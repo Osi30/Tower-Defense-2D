@@ -224,7 +224,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2182707411679346696}
         m_TargetAssemblyTypeName: Assets.Scripts.Tower.TowerControl, Assembly-CSharp
-        m_MethodName: OpenChoicePanel
+        m_MethodName: SetActivePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -286,6 +286,7 @@ MonoBehaviour:
   _sellCoin: 500
   _upgradeCointText: {fileID: 0}
   _sellCoinText: {fileID: 6490462391719315983}
+  _upgradeCanvas: {fileID: 5241091244386182636}
 --- !u!1 &8706360399046852708
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,19 +429,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7999111127085532, guid: eb29da59c52e01347a4c6073d42e7c6b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7999111127085532, guid: eb29da59c52e01347a4c6073d42e7c6b, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7999111127085532, guid: eb29da59c52e01347a4c6073d42e7c6b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 2.499
       objectReference: {fileID: 0}
     - target: {fileID: 7999111127085532, guid: eb29da59c52e01347a4c6073d42e7c6b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -2.09
       objectReference: {fileID: 0}
     - target: {fileID: 1068624804412205418, guid: eb29da59c52e01347a4c6073d42e7c6b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -550,6 +551,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2182707411679346696}
+    - target: {fileID: 4435383285806764199, guid: eb29da59c52e01347a4c6073d42e7c6b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5432750513405370321, guid: eb29da59c52e01347a4c6073d42e7c6b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -601,6 +606,11 @@ RectTransform:
 --- !u!224 &2793906874156789015 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4216527316964258516, guid: eb29da59c52e01347a4c6073d42e7c6b, type: 3}
+  m_PrefabInstance: {fileID: 2036170460374343619}
+  m_PrefabAsset: {fileID: 0}
+--- !u!223 &5241091244386182636 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 6124322136594971183, guid: eb29da59c52e01347a4c6073d42e7c6b, type: 3}
   m_PrefabInstance: {fileID: 2036170460374343619}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &6490462391719315983 stripped

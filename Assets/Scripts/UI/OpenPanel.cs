@@ -20,5 +20,11 @@ namespace Assets.Scripts.UI
             _panel.alpha = 0;
             _panel.gameObject.SetActive(false);
         }
+
+        public void SetActivePanel()
+        {
+            if (_panel.gameObject.activeSelf) CloseChoicePanel();
+            else OpenChoicePanel();
+        }
     }
 }

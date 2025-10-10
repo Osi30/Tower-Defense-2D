@@ -1,5 +1,7 @@
 ﻿
 
+using Assets.Scripts.LevelManagement.Dtos;
+using Assets.Scripts.Security;
 using UnityEngine;
 
 namespace Assets.Scripts.UI
@@ -29,7 +31,7 @@ namespace Assets.Scripts.UI
 
         public void Refuse()
         {
-            GameManager.Instance.UserData.gameProgress.waveId = 0;
+            APICaller.Instance.DeleteGameProgress();
             ClosePanel();
         }
     }

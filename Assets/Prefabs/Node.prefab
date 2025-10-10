@@ -83,6 +83,7 @@ MonoBehaviour:
   _placeToChoose: {fileID: 4387567686340377813}
   _defenseTowerData: {fileID: 11400000, guid: d6b7ef7f754de284badd4a397c27fd01, type: 2}
   _parent: {fileID: 7734419750031144708}
+  _towerCoin: f40100008a020000ee020000
 --- !u!1001 &918236528704086282
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -221,6 +222,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.0094
       objectReference: {fileID: 0}
+    - target: {fileID: 1187048608643126338, guid: 96791365abdc5de4a82cccc2487828e4, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2346325351209732620, guid: 96791365abdc5de4a82cccc2487828e4, type: 3}
       propertyPath: m_SortingOrder
       value: 2
@@ -261,6 +266,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2947523627218929591}
+    - target: {fileID: 8568169068983938807, guid: 96791365abdc5de4a82cccc2487828e4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActivePanel
+      objectReference: {fileID: 0}
     - target: {fileID: 8609680181964915512, guid: 96791365abdc5de4a82cccc2487828e4, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -384,11 +393,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 826410224144294115, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 826410224144294115, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 826410224144294115, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_SizeDelta.x
@@ -400,11 +409,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 826410224144294115, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 13.683333
       objectReference: {fileID: 0}
     - target: {fileID: 826410224144294115, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -2.85265
       objectReference: {fileID: 0}
     - target: {fileID: 1650756640674519177, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_Name
@@ -456,7 +465,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3109150984345746865, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3109150984345746865, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -484,7 +493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3109150984345746865, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChooseTower
+      value: BuyTower
       objectReference: {fileID: 0}
     - target: {fileID: 3109150984345746865, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -516,11 +525,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3956845805946894862, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3956845805946894862, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3956845805946894862, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_SizeDelta.x
@@ -532,11 +541,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3956845805946894862, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 2.7416668
       objectReference: {fileID: 0}
     - target: {fileID: 3956845805946894862, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -2.85265
       objectReference: {fileID: 0}
     - target: {fileID: 4039276900710062758, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_SortingOrder
@@ -545,6 +554,10 @@ PrefabInstance:
     - target: {fileID: 4039276900710062758, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_SortingLayerID
       value: -995806183
+      objectReference: {fileID: 0}
+    - target: {fileID: 4039276900710062758, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4146756831021646307, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_text
@@ -614,7 +627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5384348824519040263, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6360440920895526113, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_SizeDelta.x
@@ -748,11 +761,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8562301402124715979, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8562301402124715979, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8562301402124715979, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_SizeDelta.x
@@ -764,11 +777,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8562301402124715979, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 8.175
       objectReference: {fileID: 0}
     - target: {fileID: 8562301402124715979, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -2.85265
       objectReference: {fileID: 0}
     - target: {fileID: 8687780593672318403, guid: f1669c298bbbf634e860ce7f2fe43320, type: 3}
       propertyPath: m_AnchorMax.x
@@ -877,24 +890,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2947523627218929591}
         m_TargetAssemblyTypeName: NodeControl, Assembly-CSharp
-        m_MethodName: ChooseTower
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2947523627218929591}
-        m_TargetAssemblyTypeName: NodeControl, Assembly-CSharp
         m_MethodName: BuyTower
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 500
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -950,24 +951,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2947523627218929591}
         m_TargetAssemblyTypeName: NodeControl, Assembly-CSharp
-        m_MethodName: ChooseTower
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2947523627218929591}
-        m_TargetAssemblyTypeName: NodeControl, Assembly-CSharp
         m_MethodName: BuyTower
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 650
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

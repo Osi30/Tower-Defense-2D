@@ -81,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 123539529
-  m_SortingLayer: 2
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 2847894867104497665, guid: 26aa57ac9473a0e4a9e6ace46b9bd46d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -144,7 +144,7 @@ MonoBehaviour:
   _attackRadius: 11.5
   _attackDamage: 3
   _attackSpeed: 1.5
-  _attackCoolDownTime: 0.9
+  _attackCoolDownTime: 0.8
   _enemyMask:
     serializedVersion: 2
     m_Bits: 256
