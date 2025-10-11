@@ -14,11 +14,14 @@ public class NodeControl : OpenPanel
     private DefenseTowerData _defenseTowerData;
     [SerializeField]
     private Transform _parent;
+    [SerializeField]
+    private int[] _towerCoin = { 500, 650, 750 };
 
-    public async void ChooseTower(int id)
+    private int _towerType = -1;
+    public int GetTowerType => _towerType;
+
+    public async void ApplyTower(int id)
     {
-        Debug.Log("Choose");
-
         // Close Node
         _placeToChoose.SetActive(false);
         CloseChoicePanel();
@@ -27,14 +30,25 @@ public class NodeControl : OpenPanel
         await InstantiateTower(id);
     }
 
-    public void BuyTower(int coin)
+    public void BuyTower(int id)
     {
-        _uiLevel.UpdateCoin(-coin);
+        //Debug.Log("Buy");
+        int coinId = id == 0 ? id : id / 2;
+        int coin = _towerCoin[coinId];
+
+        if (_uiLevel.IsEnoughCoin(coin))
+        {
+            AudioManager.Instance.PlaySFX("CoinBuy");
+            _uiLevel.UpdateCoin(-coin);
+            _towerType = id;
+            ApplyTower(id);
+        }
     }
 
     private async Task InstantiateTower(int id)
     {
         Debug.Log("Instantiate");
+        AudioManager.Instance.PlaySFX("BuildTower");
 
         var tower = _defenseTowerData.GetTowerById(id).InstantiateAsync(_parent);
         await tower.Task;
@@ -46,25 +60,38 @@ public class NodeControl : OpenPanel
 
         // Setup Event (Upgrade / Sold)
         var control = towerGO.GetComponent<TowerControl>();
+        control.UpgradeCanvas.overrideSorting = true;
+        control.UpgradeCanvas.sortingOrder = 2;
         control.OnSoldEvent += OnSoleTower;
         control.OnUpgradeEvent += OnUpgradeTower;
     }
 
     public void OnSoleTower(int coin)
     {
+        AudioManager.Instance.PlaySFX("CoinBuy");
         // Update Current Coin
         _uiLevel.UpdateCoin(coin);
 
         // Activate Node to choose
         _placeToChoose.SetActive(true);
+
+        // Set Tower to -1
+        _towerType = -1;
     }
 
-    public async Task OnUpgradeTower(int id, int coin)
+    public async Task<bool> OnUpgradeTower(int id, int coin)
     {
+        // Validate Coin
+        if (!_uiLevel.IsEnoughCoin(coin)) return false;
+
+        AudioManager.Instance.PlaySFX("CoinBuy");
         // Update Current Coin
         _uiLevel.UpdateCoin(coin);
 
         // Instantiate Tower
+        _towerType = id;
         await InstantiateTower(id);
+
+        return true;
     }
 }

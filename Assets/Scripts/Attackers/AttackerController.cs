@@ -1,4 +1,5 @@
 using System.Collections;
+using Assets.Scripts;
 using UnityEngine;
 
 public class AttackerController : MonoBehaviour
@@ -6,7 +7,7 @@ public class AttackerController : MonoBehaviour
     [SerializeField]
     private float _attackRadius;
     [SerializeField]
-    private int _attackDamage;
+    private float _attackDamage;
     [SerializeField]
     private float _attackSpeed;
     [SerializeField]
@@ -23,6 +24,11 @@ public class AttackerController : MonoBehaviour
     private void Awake()
     {
         _arrowPool = GameObject.FindGameObjectWithTag("ArrowPool").GetComponent<ArrowPool>();
+        var inventory = GameManager.Instance.UserData.inventory;
+        _attackRadius += inventory.range / 5f;
+        _attackSpeed += inventory.attackSpeed / 10f;
+        _attackCoolDownTime -= inventory.attackSpeed / 10f;
+        _attackDamage += inventory.damage / 5f;
     }
 
     private void Update()
@@ -59,6 +65,7 @@ public class AttackerController : MonoBehaviour
     {
         if (_target == null) return;
 
+        AudioManager.Instance.PlaySFX("ArrowShot");
         // Get Arrow and Fire Target
         Vector2 direction = GetDirectionToTarget().normalized;
         Arrow arrow = _arrowPool.GetOneArrow();

@@ -1,41 +1,54 @@
 ﻿using UnityEngine;
 using TMPro;
+using Assets.Scripts.UI;
 
 public class LevelNodeWorld : MonoBehaviour
 {
     [Header("Refs")]
-    public SpriteRenderer baseSprite;
     public TextMeshPro label;
     public GameObject lockIcon;
-    public SpriteRenderer[] starSprites;     // gán 3 sprite sao
+    public GameObject _unlockIcon;
+    public GameObject _stars;
+    public SpriteRenderer[] starSprites;
     public Sprite starOn;
     public Sprite starOff;
 
     [Header("Data")]
-    public int levelIndex = 1;
-    public bool isUnlocked = false;
-    public int starsEarned = 0;
+    [SerializeField]
+    private int levelIndex = 1;
 
-    System.Action<int> onClicked;
+    [SerializeField]
+    private Spinner _spinner;
 
-    public void Setup(int index, bool unlocked, int stars, System.Action<int> onClick)
+    private bool isUnlocked = false;
+    private int starsEarned = 0;
+
+    private void Awake()
     {
-        levelIndex = index;
+        if (label) label.text = levelIndex.ToString();
+    }
+
+    public void Setup(bool unlocked, int stars)
+    {
         isUnlocked = unlocked;
         starsEarned = Mathf.Clamp(stars, 0, 3);
-        onClicked = onClick;
-
-        if (label) label.text = levelIndex.ToString();
-        if (lockIcon) lockIcon.SetActive(!isUnlocked);
+        if (lockIcon && _stars)
+        {
+            lockIcon.SetActive(!isUnlocked);
+            _stars.SetActive(isUnlocked);
+            _unlockIcon.SetActive(isUnlocked);
+        }
 
         if (starSprites != null)
             for (int i = 0; i < starSprites.Length; i++)
                 starSprites[i].sprite = (i < starsEarned) ? starOn : starOff;
     }
 
-    // đơn giản cho người mới: bắt click bằng OnMouseUpAsButton
-    void OnMouseUpAsButton()
+    public void LoadGameScene()
     {
-        if (isUnlocked) onClicked?.Invoke(levelIndex);
+        _spinner.StartSpin();
+        AudioManager.Instance.PlaySFX("ButtonClick");
+        SceneController.LoadScene(levelIndex + 1);
+        _spinner.StopSpin();
     }
 }

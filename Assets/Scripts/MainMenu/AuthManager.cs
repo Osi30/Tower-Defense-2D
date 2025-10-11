@@ -1,6 +1,9 @@
 ﻿using System;
-using System.Text;
 using System.Collections;
+using Assets.Scripts;
+using Assets.Scripts.LevelManagement.Dtos;
+using Assets.Scripts.Security;
+using Assets.Scripts.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -24,7 +27,10 @@ public class AuthManager : MonoBehaviour
     [Header("Managers")]
     public MainMenuManager mainMenuManager;
 
-    private const string BaseUrl = "https://localhost:7047/"; // link API localhost
+    [Header("Spinner")]
+    [SerializeField]
+    private Spinner spinner;
+
     private const string LoginEndpoint = "/api/Customer/login";   // endpoint login
     private const string RegisterEndpoint = "/api/Customer/register"; // endpoint register
 
@@ -48,7 +54,7 @@ public class AuthManager : MonoBehaviour
         public int currentCoin;
         public int currentHeart;
         public int currentPoint;
-        public int? waveId; 
+        public int? waveId;
     }
 
     [Serializable]
@@ -72,6 +78,7 @@ public class AuthManager : MonoBehaviour
     // --- Hiển thị các form ---
     public void ShowLoginForm()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         choicePanel.SetActive(false);
         loginFormPanel.SetActive(true);
         registerFormPanel.SetActive(false);
@@ -79,6 +86,7 @@ public class AuthManager : MonoBehaviour
 
     public void ShowRegisterForm()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         choicePanel.SetActive(false);
         loginFormPanel.SetActive(false);
         registerFormPanel.SetActive(true);
@@ -87,6 +95,7 @@ public class AuthManager : MonoBehaviour
     // 👉 Hàm quay lại Choice Panel
     public void BackToChoice()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         choicePanel.SetActive(true);
         loginFormPanel.SetActive(false);
         registerFormPanel.SetActive(false);
@@ -95,6 +104,7 @@ public class AuthManager : MonoBehaviour
     // --- Submit ---
     public void SubmitLogin()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         if (inputLoginUsername == null || inputLoginPassword == null)
         {
             Debug.LogError("Login input fields are not assigned in the inspector.");
@@ -115,6 +125,7 @@ public class AuthManager : MonoBehaviour
 
     public void SubmitRegister()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         if (inputRegisterUsername == null || inputRegisterPassword == null || inputRegisterConfirmPassword == null)
         {
             Debug.LogError("Register input fields are not assigned in the inspector.");
@@ -143,35 +154,59 @@ public class AuthManager : MonoBehaviour
     // --- Coroutines gọi API ---
     private IEnumerator LoginAction(string username, string password)
     {
-        var url = CombineUrl(BaseUrl, LoginEndpoint)
+        spinner.StartSpin();
+
+        var url = CombineUrl(BuildConstants.PRODUCTION_URL, LoginEndpoint)
                   + $"?username={UnityWebRequest.EscapeURL(username)}&password={UnityWebRequest.EscapeURL(password)}";
 
-        var uwr = new UnityWebRequest(url, "POST");
-        uwr.downloadHandler = new DownloadHandlerBuffer();
+        var uwr = new UnityWebRequest(url, "POST")
+        {
+            downloadHandler = new DownloadHandlerBuffer()
+        };
         uwr.SetRequestHeader("Accept", "application/json");
 
         yield return uwr.SendWebRequest();
 
+        // Check success or fail
         if (uwr.result == UnityWebRequest.Result.ConnectionError || uwr.result == UnityWebRequest.Result.ProtocolError)
         {
             Debug.Log($"[Login] Error: {uwr.responseCode} - {uwr.error}\nBody: {uwr.downloadHandler.text}");
+            spinner.StopSpin();
             yield break;
         }
 
-        Debug.Log($"Login success: {username}");
-        PlayerPrefs.SetString("player_name", username);
-        if (mainMenuManager != null) mainMenuManager.ShowMainMenuPanel();
-        else Debug.LogWarning("[Login] mainMenuManager is not assigned.");
+        SetUserData(uwr);
+        spinner.StopSpin();
+        LoadLevelMenuScene();
+    }
+
+    private void SetUserData(UnityWebRequest uwr)
+    {
+        // Convert data
+        string jsonResponse = uwr.downloadHandler.text;
+        try
+        {
+            UserData userData = JsonUtility.FromJson<UserData>(jsonResponse);
+            GameManager.Instance.UserData = userData;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error when deserialization (LevelData): " + e.Message);
+        }
     }
 
 
     private IEnumerator RegisterAction(string username, string password)
     {
-        var url = CombineUrl(BaseUrl, RegisterEndpoint)
+        spinner.StartSpin();
+
+        var url = CombineUrl(BuildConstants.PRODUCTION_URL, RegisterEndpoint)
                   + $"?username={UnityWebRequest.EscapeURL(username)}&password={UnityWebRequest.EscapeURL(password)}";
 
-        var uwr = new UnityWebRequest(url, "POST");
-        uwr.downloadHandler = new DownloadHandlerBuffer();
+        var uwr = new UnityWebRequest(url, "POST")
+        {
+            downloadHandler = new DownloadHandlerBuffer()
+        };
         uwr.SetRequestHeader("Accept", "application/json");
 
         yield return uwr.SendWebRequest();
@@ -179,17 +214,16 @@ public class AuthManager : MonoBehaviour
         if (uwr.result == UnityWebRequest.Result.ConnectionError || uwr.result == UnityWebRequest.Result.ProtocolError)
         {
             Debug.Log($"[Register] Error: {uwr.responseCode} - {uwr.error}\nBody: {uwr.downloadHandler.text}");
+            spinner.StopSpin();
             yield break;
         }
 
         Debug.Log($"Register success: {username}");
-        PlayerPrefs.SetString("player_name", username);
-        if (mainMenuManager != null) mainMenuManager.ShowMainMenuPanel();
-        else Debug.LogWarning("[Register] mainMenuManager is not assigned.");
+        SetUserData(uwr);
+
+        spinner.StopSpin();
+        LoadLevelMenuScene();
     }
-
-
-
 
     private static string CombineUrl(string baseUrl, string endpoint)
     {
@@ -201,5 +235,10 @@ public class AuthManager : MonoBehaviour
     private bool IsValidCredentials(string username, string password)
     {
         return !string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password);
+    }
+
+    private void LoadLevelMenuScene()
+    {
+        SceneController.LoadScene(1);
     }
 }

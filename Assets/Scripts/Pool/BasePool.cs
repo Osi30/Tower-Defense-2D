@@ -18,7 +18,7 @@ public class BasePool<V> : MonoBehaviour
 
     protected StaticPool<V> _pool;
 
-    protected async void Start()
+    protected async void Awake()
     {
         await InitPool(_poolSize);
     }

@@ -1,17 +1,15 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
     [Header("Panels")]
-    public GameObject startPanel;   // Start Panel
-    public GameObject authPanel;    // Auth Panel
-    public GameObject mainMenuPanel; // Main Menu Panel
-    public GameObject optionsPanel; //Option Panel
+    public GameObject startPanel;  
+    public GameObject authPanel;  
+
     private void Start()
     {
         // Đảm bảo không bị NullReference
-        if (startPanel == null || authPanel == null || mainMenuPanel == null)
+        if (startPanel == null || authPanel == null)
         {
             Debug.LogError("⚠️ Một hoặc nhiều panel chưa được gán trong Inspector.");
             return;
@@ -24,17 +22,14 @@ public class MainMenuManager : MonoBehaviour
   
     public void ShowStartPanel()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         SetActivePanel(startPanel);
     }
 
     public void ShowAuthPanel()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         SetActivePanel(authPanel);
-    }
-
-    public void ShowMainMenuPanel()
-    {
-        SetActivePanel(mainMenuPanel);
     }
 
     /// <summary>
@@ -42,39 +37,14 @@ public class MainMenuManager : MonoBehaviour
     /// </summary>
     private void SetActivePanel(GameObject panelToShow)
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         startPanel.SetActive(panelToShow == startPanel);
         authPanel.SetActive(panelToShow == authPanel);
-        mainMenuPanel.SetActive(panelToShow == mainMenuPanel);
     }
 
-    // --- Main menu actions ---
-    public void PlayGame()
-    {
-        int currentIndex = SceneManager.GetActiveScene().buildIndex;
-
-        // Kiểm tra để tránh vượt quá số scene trong Build Settings
-        if (currentIndex + 1 < SceneManager.sceneCountInBuildSettings)
-        {
-            SceneManager.LoadScene(currentIndex + 1);
-        }
-        else
-        {
-            Debug.LogError("⚠️ Không có scene tiếp theo trong Build Settings.");
-        }
-    }
-
-    public void OpenOptions()
-    {
-       optionsPanel.SetActive(true);
-       mainMenuPanel.SetActive(false);
-    }
-    public void BackToMenu()
-    {
-        optionsPanel.SetActive(false);
-        mainMenuPanel.SetActive(true);
-    }
     public void QuitGame()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         Debug.Log("Quit requested");
         Application.Quit();
 

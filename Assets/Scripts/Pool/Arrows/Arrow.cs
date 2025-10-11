@@ -13,9 +13,9 @@ public class Arrow : BasePoolMember
     private float _damageRadius = 1f;
 
     private Coroutine _fireCoroutine;
-    private int _damage = 1;
+    private float _damage = 1;
 
-    public void SetDamage(int damage) => _damage = damage;
+    public void SetDamage(float damage) => _damage = damage;
 
     private void OnDisable()
     {
@@ -53,6 +53,7 @@ public class Arrow : BasePoolMember
 
             if (IsHit())
             {
+                AudioManager.Instance.PlaySFX("ArrowHit");
                 break;
             }
 

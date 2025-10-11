@@ -72,8 +72,8 @@ namespace Assets.Scripts.LevelManagement
         {
             EnemyControl enemy = await _enemyPoolControl.GetEnemyPool(enemyType).GetOneEnemy();
             enemy.SetWayPoints(_wayPoints);
-            enemy.OnEnemyDefeated += OnEnemyDefeated;
-            enemy.OnEnemyArrive += OnEnemyArrive;
+            if (enemy.OnEnemyDefeated == null) enemy.OnEnemyDefeated += OnEnemyDefeated;
+            if (enemy.OnEnemyArrive == null) enemy.OnEnemyArrive += OnEnemyArrive;
             enemy.InitializeEnemy();
         }
 

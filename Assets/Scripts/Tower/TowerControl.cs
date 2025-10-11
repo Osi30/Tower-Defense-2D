@@ -7,6 +7,9 @@ namespace Assets.Scripts.Tower
 {
     public class TowerControl : OpenPanel
     {
+        public delegate void OnSold(int coin = 0);
+        public delegate Task<bool> OnUpgrade(int id, int coin = 0);
+
         [SerializeField]
         private int _upgradeCoin;
         [SerializeField]
@@ -15,13 +18,14 @@ namespace Assets.Scripts.Tower
         private TextMeshProUGUI _upgradeCointText;
         [SerializeField]
         private TextMeshProUGUI _sellCoinText;
-
-        public delegate void OnSold(int coin = 0);
-        public delegate Task OnUpgrade(int id, int coin = 0);
+        [SerializeField]
+        private Canvas _upgradeCanvas;
 
         public OnSold OnSoldEvent;
 
         public OnUpgrade OnUpgradeEvent;
+
+        public Canvas UpgradeCanvas => _upgradeCanvas;
 
         private void Awake()
         {
@@ -31,9 +35,13 @@ namespace Assets.Scripts.Tower
 
         public async void Upgrade(int id)
         {
-            CloseChoicePanel();
-            await OnUpgradeEvent.Invoke(id, -_upgradeCoin);
-            Destroy(gameObject);
+            bool result = await OnUpgradeEvent.Invoke(id, -_upgradeCoin);
+
+            if (result)
+            {
+                CloseChoicePanel();
+                Destroy(gameObject);
+            }
         }
 
         public void Sold()

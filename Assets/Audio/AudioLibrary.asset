@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a8f08b3eb0c384c83bd49a3d1e0070, type: 3}
+  m_Name: AudioLibrary
+  m_EditorClassIdentifier: Assembly-CSharp::AudioLibrary
+  sounds:
+  - key: bgm_main
+    clip: {fileID: 8300000, guid: 5b1ed8fbe89154eaf96723b6e5f0aad3, type: 3}
+    type: 0
+    volume: 0.8
+    pitch: 0.8
+    loop: 1
+  - key: bgm_road_01
+    clip: {fileID: 8300000, guid: bea93a38b71b64b598109b3a3b1a0048, type: 3}
+    type: 0
+    volume: 0.8
+    pitch: 0.8
+    loop: 1
+  - key: bgm_road_02
+    clip: {fileID: 8300000, guid: 9be60e14e18a63d40a91ba42ccdf90bb, type: 3}
+    type: 0
+    volume: 0.8
+    pitch: 0.8
+    loop: 1
+  - key: bgm_level_01
+    clip: {fileID: 8300000, guid: 458dd8822518c4f37bc3edba9b6c57d9, type: 3}
+    type: 0
+    volume: 0.8
+    pitch: 0.8
+    loop: 1
+  - key: bgm_level_02
+    clip: {fileID: 8300000, guid: ad57640e1bbe3f24e9295e3b275be587, type: 3}
+    type: 0
+    volume: 0.8
+    pitch: 0.8
+    loop: 1
+  - key: ButtonClick
+    clip: {fileID: 8300000, guid: 4270a7ca5d7f34c44a4212f6a325c61f, type: 3}
+    type: 1
+    volume: 1
+    pitch: 1.5
+    loop: 0
+  - key: Gameover
+    clip: {fileID: 8300000, guid: 5d2a53a472811cc45b48d373220a0039, type: 3}
+    type: 1
+    volume: 1
+    pitch: 1.5
+    loop: 0
+  - key: Victory
+    clip: {fileID: 8300000, guid: 1df2143dce545484cbb223c90cbeae7a, type: 3}
+    type: 1
+    volume: 1
+    pitch: 1.5
+    loop: 0
+  - key: ArrowShot
+    clip: {fileID: 8300000, guid: 9b6e88c840715aa4bb75274e1ec2039b, type: 3}
+    type: 1
+    volume: 1
+    pitch: 1.5
+    loop: 0
+  - key: ArrowHit
+    clip: {fileID: 8300000, guid: a397000f4b889314e8e1e2951b72b938, type: 3}
+    type: 1
+    volume: 1
+    pitch: 1.5
+    loop: 0
+  - key: CoinBuy
+    clip: {fileID: 8300000, guid: e14bb6d5e7274d84ba1ba3d98e696e26, type: 3}
+    type: 1
+    volume: 1
+    pitch: 3
+    loop: 0
+  - key: BuildTower
+    clip: {fileID: 8300000, guid: f9f363e8a4ff5ee4393f2cd6a664f973, type: 3}
+    type: 1
+    volume: 1
+    pitch: 3
+    loop: 0
+  - key: Alert
+    clip: {fileID: 8300000, guid: d90d09e91a719314e988e1bbfd53e270, type: 3}
+    type: 1
+    volume: 1
+    pitch: 3
+    loop: 0
+  - key: Boom
+    clip: {fileID: 8300000, guid: c6c7a24fccf5ec54ebb445cac97ec2b8, type: 3}
+    type: 1
+    volume: 1
+    pitch: 3
+    loop: 0
+  - key: Thunder
+    clip: {fileID: 8300000, guid: c72b7f6669ba8dc40a1643e0f36135ae, type: 3}
+    type: 1
+    volume: 1
+    pitch: 3
+    loop: 0

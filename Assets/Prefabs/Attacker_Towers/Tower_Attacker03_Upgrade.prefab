@@ -122,7 +122,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8292209075888210393}
         m_TargetAssemblyTypeName: Assets.Scripts.Tower.TowerControl, Assembly-CSharp
-        m_MethodName: OpenChoicePanel
+        m_MethodName: SetActivePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
