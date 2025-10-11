@@ -324,10 +324,8 @@ namespace Assets.Scripts.LevelManagement
 
         private async void UpdateResultLevel(ResultLevel result)
         {
-            bool isSuccess = await APICaller.Instance.CreateResultLevel(result);
-
             // For Delete Result Level
-            if (isSuccess && result.gameLevelId != 0)
+            if (result.gameLevelId != 0)
             {
                 var results = GameManager.Instance.UserData.resultLevels;
                 var existedResult = results.FirstOrDefault(r => r.gameLevelId == result.gameLevelId);
@@ -343,6 +341,13 @@ namespace Assets.Scripts.LevelManagement
                 {
                     results.Add(result);
                 }
+            }
+
+            bool isSuccess = await APICaller.Instance.CreateResultLevel(result);
+
+            if (!isSuccess)
+            {
+                // Do something
             }
         }
 
