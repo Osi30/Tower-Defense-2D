@@ -1,4 +1,5 @@
 using System.Collections;
+using Assets.Scripts;
 using UnityEngine;
 
 public class AttackerController : MonoBehaviour
@@ -6,13 +7,15 @@ public class AttackerController : MonoBehaviour
     [SerializeField]
     private float _attackRadius;
     [SerializeField]
+    private float _attackDamage;
+    [SerializeField]
+    private float _attackSpeed;
+    [SerializeField]
     private float _attackCoolDownTime;
     [SerializeField]
     private LayerMask _enemyMask;
     [SerializeField]
     private BaseAnimationControl _animationControl;
-
-   
 
     private Transform _target;
     private ArrowPool _arrowPool;
@@ -21,6 +24,11 @@ public class AttackerController : MonoBehaviour
     private void Awake()
     {
         _arrowPool = GameObject.FindGameObjectWithTag("ArrowPool").GetComponent<ArrowPool>();
+        var inventory = GameManager.Instance.UserData.inventory;
+        _attackRadius += inventory.range / 5f;
+        _attackSpeed += inventory.attackSpeed / 10f;
+        _attackCoolDownTime -= inventory.attackSpeed / 10f;
+        _attackDamage += inventory.damage / 5f;
     }
 
     private void Update()
@@ -33,6 +41,12 @@ public class AttackerController : MonoBehaviour
         // Attack Target
         else
         {
+            if (!_target.gameObject.activeSelf)
+            {
+                _target = null;
+                return;
+            }
+
             if (!_isCooldown)
             {
                 _animationControl.ActivateTriggerFlag(ATrigger.Attack);
@@ -51,11 +65,13 @@ public class AttackerController : MonoBehaviour
     {
         if (_target == null) return;
 
+        AudioManager.Instance.PlaySFX("ArrowShot");
         // Get Arrow and Fire Target
         Vector2 direction = GetDirectionToTarget().normalized;
         Arrow arrow = _arrowPool.GetOneArrow();
+        arrow.SetDamage(_attackDamage);
         arrow.InitializeArrow(transform.position, direction);
-        arrow.StartFire(direction);
+        arrow.StartFire(direction, _attackSpeed);
     }
 
     private IEnumerator StartCoolDown()
@@ -90,7 +106,7 @@ public class AttackerController : MonoBehaviour
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, _attackRadius, (Vector2)transform.position, 0f, _enemyMask);
 
         // Something Hit Attack Range
-        if (hit.collider != null) _target = hit.collider.transform;
+        if (hit.collider != null && hit.collider.gameObject.activeSelf) _target = hit.collider.transform;
     }
 
     private void OnDrawGizmos()

@@ -46,6 +46,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 1085154797
+    locked: 0
+  - name: Map
+    uniqueID: 3544671127
+    locked: 0
+  - name: LevelNodes
+    uniqueID: 2427407591
+    locked: 0
+  - name: Top
+    uniqueID: 1430066691
   - name: Tower
     uniqueID: 2869753029
     locked: 0
@@ -54,6 +65,9 @@ TagManager:
     locked: 0
   - name: Arrow
     uniqueID: 980727543
+    locked: 0
+  - name: UI
+    uniqueID: 3299161113
     locked: 0
   m_RenderingLayers:
   - Default
