@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Assets.Scripts.LevelManagement.Dtos;
 using Assets.Scripts.LevelManagement.UI;
 using Assets.Scripts.Security;
@@ -19,6 +20,8 @@ namespace Assets.Scripts.LevelManagement
         private LevelData _levelData;
         [SerializeField]
         private NodeControl[] _towerPlaces;
+        [SerializeField]
+        private BaseAnimationControl[] _danger;
 
         [Header("UI")]
         [SerializeField]
@@ -37,6 +40,9 @@ namespace Assets.Scripts.LevelManagement
 
         private async void Awake()
         {
+            // Play Music
+            AudioManager.Instance.PlayMusic(Random.Range(0, 2) == 0 ? "bgm_level_01" : "bgm_level_02");
+
             // Init Events
             InitializeEvents();
 
@@ -110,7 +116,7 @@ namespace Assets.Scripts.LevelManagement
             }
         }
 
-        private void SpawnEnemy()
+        private async void SpawnEnemy()
         {
             if (_currentWaveLevel == _levelData.waves.Count)
             {
@@ -121,6 +127,13 @@ namespace Assets.Scripts.LevelManagement
             }
 
             // Start Spawn System
+            AudioManager.Instance.PlaySFX("Alert");
+            foreach (var alert in _danger)
+            {
+                alert.ActivateTriggerFlag(ATrigger.Alert);
+            }
+            await Task.Delay(1500);
+
             WaveData waveData = _levelData.waves[_currentWaveLevel];
 
             // Update Progress
@@ -165,7 +178,7 @@ namespace Assets.Scripts.LevelManagement
                 currentHeart = _uiLevel.GetHeart,
                 customerId = GameManager.Instance.UserData.id,
                 waveId = waveId,
-                currentPoint = 0,
+                currentPoint = _uiLevel.GetPoint,
                 towerplaces = towerPlaces
             };
             var result = await APICaller.Instance.UpdateGameProgress(gameProgress);
@@ -187,21 +200,26 @@ namespace Assets.Scripts.LevelManagement
             _currentEnemy--;
 
             int addCoin = 0;
+            int addPoint = 0;
 
             switch (enemyType)
             {
                 case "Slime":
                     addCoin = 50;
+                    addPoint = 3;
                     break;
                 case "Goblin":
                     addCoin = 75;
+                    addPoint = 4;
                     break;
                 default:
                     addCoin = 100;
+                    addPoint = 5;
                     break;
             }
 
             _uiLevel.UpdateCoin(addCoin);
+            _uiLevel.UpdatePoint(addPoint);
 
             if (_currentEnemy <= 0)
             {
@@ -212,18 +230,15 @@ namespace Assets.Scripts.LevelManagement
 
         public void OnEnemyArrive(string enemyType)
         {
-            _uiLevel.UpdateHeart(-1);
+            int heartLoss = enemyType switch
+            {
+                "Slime" => -1,
+                "Goblin" => -2,
+                _ => -3,
+            };
+            _uiLevel.UpdateHeart(heartLoss);
             _currentEnemy--;
 
-            switch (enemyType)
-            {
-                case "Slime":
-                    break;
-                case "Goblin":
-                    break;
-                default:
-                    break;
-            }
 
             if (_uiLevel.GetHeart == 0)
             {
@@ -251,9 +266,9 @@ namespace Assets.Scripts.LevelManagement
             {
                 customerId = userData.id,
                 star = _uiLevel.GetHeart / (_levelData.heart / 3),
-                point = 0,
                 gameLevelId = _level
             };
+            result.point = _uiLevel.GetPoint * result.star;
 
             // Reward after game
             Inventory inventory = userData.inventory;

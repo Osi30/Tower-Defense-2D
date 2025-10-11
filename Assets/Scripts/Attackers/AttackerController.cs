@@ -65,6 +65,7 @@ public class AttackerController : MonoBehaviour
     {
         if (_target == null) return;
 
+        AudioManager.Instance.PlaySFX("ArrowShot");
         // Get Arrow and Fire Target
         Vector2 direction = GetDirectionToTarget().normalized;
         Arrow arrow = _arrowPool.GetOneArrow();

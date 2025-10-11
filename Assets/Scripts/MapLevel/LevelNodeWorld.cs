@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
+using Assets.Scripts.UI;
 
 public class LevelNodeWorld : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class LevelNodeWorld : MonoBehaviour
     [Header("Data")]
     [SerializeField]
     private int levelIndex = 1;
+
+    [SerializeField]
+    private Spinner _spinner;
 
     private bool isUnlocked = false;
     private int starsEarned = 0;
@@ -42,6 +46,9 @@ public class LevelNodeWorld : MonoBehaviour
 
     public void LoadGameScene()
     {
+        _spinner.StartSpin();
+        AudioManager.Instance.PlaySFX("ButtonClick");
         SceneController.LoadScene(levelIndex + 1);
+        _spinner.StopSpin();
     }
 }

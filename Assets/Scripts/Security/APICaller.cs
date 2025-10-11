@@ -1,7 +1,7 @@
-﻿using Assets.Scripts.LevelManagement.Dtos;
-using System;
+﻿using System;
 using System.Text;
 using System.Threading.Tasks;
+using Assets.Scripts.LevelManagement.Dtos;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -186,6 +186,39 @@ namespace Assets.Scripts.Security
                 Debug.LogError("Failed to create ResultLevel: " + webRequest.error);
                 return false;
             }
+        }
+
+        /// <summary>
+        /// GET: /api/Customer/points
+        /// </summary>
+        /// <returns>Danh sách thông tin khách hàng với điểm số</returns>
+        public async Task<UserData[]> GetCustomerPoints()
+        {
+            string fullUrl = BuildConstants.PRODUCTION_URL + "/api/Customer/points";
+
+            UnityWebRequest webRequest = UnityWebRequest.Get(fullUrl);
+            await webRequest.SendWebRequest();
+
+            if (webRequest.result == UnityWebRequest.Result.Success)
+            {
+                string jsonResponse = webRequest.downloadHandler.text;
+                try
+                {
+                    // Sử dụng JsonHelper để parse mảng JSON từ API
+                    UserData[] customerPoints = JsonHelper.FromJson<UserData>(jsonResponse);
+                    return customerPoints;
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError("Error when deserialization (CustomerPoint[]): " + e.Message);
+                }
+            }
+            else
+            {
+                Debug.LogError("Request failed: " + webRequest.error);
+            }
+
+            return null; // Trả về null nếu request hoặc deserialization thất bại
         }
 
         public async void DeleteGameProgress()

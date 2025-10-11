@@ -1,21 +1,23 @@
-﻿using UnityEngine;
+﻿using System.Threading.Tasks;
+using Assets.Scripts;
+using Assets.Scripts.Security;
+using Assets.Scripts.UI;
+using UnityEngine;
 
-public class LeaderboardUI : MonoBehaviour
+public class LeaderboardUI : OpenPanel
 {
-    public Transform content;                 // ScrollView/Viewport/Content
-    public LeaderboardRowUI rowPrefab;
-    public string myPlayerName = "Player";    // có thể lấy từ profile
+    public Transform content;               
+    public LeaderboardRowUI rowPrefab; 
 
     void OnEnable() { Refresh(); }
 
-    public void Refresh()
+    public async void Refresh()
     {
-        foreach (Transform t in content) Destroy(t.gameObject);
-        var list = LeaderboardManager.Instance.GetSorted();
-        for (int i = 0; i < list.Count; i++)
+        var list = await APICaller.Instance.GetCustomerPoints();
+        for (int i = 0; i < list.Length; i++)
         {
             var row = Instantiate(rowPrefab, content);
-            row.Setup(i + 1, list[i], myPlayerName);
+            row.Setup(i + 1, list[i], GameManager.Instance.UserData.username);
         }
     }
 }

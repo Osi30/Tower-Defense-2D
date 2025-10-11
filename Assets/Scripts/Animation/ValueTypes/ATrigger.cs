@@ -3,5 +3,6 @@
     Attack,
     Death,
     Thunder,
-    Boom
+    Boom,
+    Alert
 }

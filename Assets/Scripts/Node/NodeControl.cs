@@ -32,12 +32,13 @@ public class NodeControl : OpenPanel
 
     public void BuyTower(int id)
     {
-        Debug.Log("Buy");
+        //Debug.Log("Buy");
         int coinId = id == 0 ? id : id / 2;
         int coin = _towerCoin[coinId];
 
         if (_uiLevel.IsEnoughCoin(coin))
         {
+            AudioManager.Instance.PlaySFX("CoinBuy");
             _uiLevel.UpdateCoin(-coin);
             _towerType = id;
             ApplyTower(id);
@@ -47,6 +48,7 @@ public class NodeControl : OpenPanel
     private async Task InstantiateTower(int id)
     {
         Debug.Log("Instantiate");
+        AudioManager.Instance.PlaySFX("BuildTower");
 
         var tower = _defenseTowerData.GetTowerById(id).InstantiateAsync(_parent);
         await tower.Task;
@@ -66,6 +68,7 @@ public class NodeControl : OpenPanel
 
     public void OnSoleTower(int coin)
     {
+        AudioManager.Instance.PlaySFX("CoinBuy");
         // Update Current Coin
         _uiLevel.UpdateCoin(coin);
 
@@ -81,6 +84,7 @@ public class NodeControl : OpenPanel
         // Validate Coin
         if (!_uiLevel.IsEnoughCoin(coin)) return false;
 
+        AudioManager.Instance.PlaySFX("CoinBuy");
         // Update Current Coin
         _uiLevel.UpdateCoin(coin);
 

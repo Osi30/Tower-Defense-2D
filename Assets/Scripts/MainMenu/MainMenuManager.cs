@@ -22,11 +22,13 @@ public class MainMenuManager : MonoBehaviour
   
     public void ShowStartPanel()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         SetActivePanel(startPanel);
     }
 
     public void ShowAuthPanel()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         SetActivePanel(authPanel);
     }
 
@@ -35,12 +37,14 @@ public class MainMenuManager : MonoBehaviour
     /// </summary>
     private void SetActivePanel(GameObject panelToShow)
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         startPanel.SetActive(panelToShow == startPanel);
         authPanel.SetActive(panelToShow == authPanel);
     }
 
     public void QuitGame()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         Debug.Log("Quit requested");
         Application.Quit();
 

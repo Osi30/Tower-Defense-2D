@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Net;
-using System.Text;
 using Assets.Scripts;
 using Assets.Scripts.LevelManagement.Dtos;
 using Assets.Scripts.Security;
@@ -80,6 +78,7 @@ public class AuthManager : MonoBehaviour
     // --- Hiển thị các form ---
     public void ShowLoginForm()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         choicePanel.SetActive(false);
         loginFormPanel.SetActive(true);
         registerFormPanel.SetActive(false);
@@ -87,6 +86,7 @@ public class AuthManager : MonoBehaviour
 
     public void ShowRegisterForm()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         choicePanel.SetActive(false);
         loginFormPanel.SetActive(false);
         registerFormPanel.SetActive(true);
@@ -95,6 +95,7 @@ public class AuthManager : MonoBehaviour
     // 👉 Hàm quay lại Choice Panel
     public void BackToChoice()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         choicePanel.SetActive(true);
         loginFormPanel.SetActive(false);
         registerFormPanel.SetActive(false);
@@ -103,6 +104,7 @@ public class AuthManager : MonoBehaviour
     // --- Submit ---
     public void SubmitLogin()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         if (inputLoginUsername == null || inputLoginPassword == null)
         {
             Debug.LogError("Login input fields are not assigned in the inspector.");
@@ -123,6 +125,7 @@ public class AuthManager : MonoBehaviour
 
     public void SubmitRegister()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         if (inputRegisterUsername == null || inputRegisterPassword == null || inputRegisterConfirmPassword == null)
         {
             Debug.LogError("Register input fields are not assigned in the inspector.");

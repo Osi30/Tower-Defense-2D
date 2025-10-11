@@ -35,9 +35,20 @@ namespace Assets.Scripts.Skills
             {
                 _skillPrepare.gameObject.SetActive(false);
                 _skills[_chooseSkill].gameObject.SetActive(true);
+
+                if (_chooseSkill == 0)
+                {
+                    AudioManager.Instance.PlaySFX("Thunder");
+                    _skillUI.LockThunderSkill();
+                }
+
+                else
+                {
+                    AudioManager.Instance.PlaySFX("Boom");
+                    _skillUI.LockBoomSkill();
+                }
                 _skills[_chooseSkill].ActivateSkill(_skillPrepare.position);
-                if (_chooseSkill == 0) _skillUI.LockThunderSkill();
-                else _skillUI.LockBoomSkill();
+
             }
         }
 

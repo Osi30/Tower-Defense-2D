@@ -9,6 +9,7 @@ namespace Assets.Scripts.UI
     {
         public void Restart()
         {
+            AudioManager.Instance.PlaySFX("ButtonClick");
             Time.timeScale = 1f;
             APICaller.Instance.DeleteGameProgress();
             SceneController.Restart();
@@ -16,6 +17,7 @@ namespace Assets.Scripts.UI
 
         public void Home()
         {
+            AudioManager.Instance.PlaySFX("ButtonClick");
             Time.timeScale = 1f;
             APICaller.Instance.DeleteGameProgress();
             SceneController.LoadRoadMap();

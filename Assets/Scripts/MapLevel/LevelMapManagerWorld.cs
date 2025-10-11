@@ -5,7 +5,6 @@ using Assets.Scripts.LevelManagement.Dtos;
 using Assets.Scripts.Security;
 using Assets.Scripts.UI;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LevelMapManagerWorld : MonoBehaviour
 {
@@ -16,10 +15,14 @@ public class LevelMapManagerWorld : MonoBehaviour
 
     private async void Awake()
     {
+        // Play Music
+        AudioManager.Instance.PlayMusic(Random.Range(0,2) == 0 ? "bgm_road_01" : "bgm_road_02");
+
+        // Setup Level Nodes
         RefreshLevelNodes();
 
+        // Show Game Progress (if any)
         int waveId = GameManager.Instance.UserData.gameProgress.waveId;
-
         if (waveId != 0)
         {
             // Continue to game progress
@@ -43,20 +46,5 @@ public class LevelMapManagerWorld : MonoBehaviour
             bool unlocked = i + 1 <= currentLevel;
             nodes[i].Setup(unlocked, currentLevel - 1 == i ? 0 : resultLevels[i].star);
         }
-    }
-
-    void OnClickLevel(int levelIndex)
-    {
-        PlayerPrefs.SetInt("current_level", levelIndex);
-        PlayerPrefs.Save();
-        // chuyển sang scene chơi thật
-        SceneManager.LoadScene("GameScene");
-    }
-
-    // Gọi từ GameScene khi thắng
-    public static void CompleteLevel(int levelIndex, int stars)
-    {
-        //SaveSystem.SetStars(levelIndex, stars);
-        //SaveSystem.SetMaxUnlocked(levelIndex + 1);
     }
 }

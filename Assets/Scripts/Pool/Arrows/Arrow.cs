@@ -53,6 +53,7 @@ public class Arrow : BasePoolMember
 
             if (IsHit())
             {
+                AudioManager.Instance.PlaySFX("ArrowHit");
                 break;
             }
 

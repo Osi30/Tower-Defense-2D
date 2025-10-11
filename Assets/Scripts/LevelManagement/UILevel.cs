@@ -21,6 +21,7 @@ namespace Assets.Scripts.LevelManagement.UI
 
         public int GetCoin => int.Parse(_coin.text);
         public int GetHeart => int.Parse(_heart.text);
+        public int GetPoint => _point;
 
         public void Initialize(LevelData levelData)
         {

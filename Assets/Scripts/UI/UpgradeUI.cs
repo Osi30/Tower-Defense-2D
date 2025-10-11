@@ -64,6 +64,7 @@ namespace Assets.Scripts.UI
 
         public void ResetInventory()
         {
+            AudioManager.Instance.PlaySFX("ButtonClick");
             _currentInventory.upgradePoint = _initInventory.upgradePoint;
             _currentInventory.range = _initInventory.range;
             _currentInventory.damage = _initInventory.damage;
@@ -73,6 +74,7 @@ namespace Assets.Scripts.UI
 
         public void AddTechnique(string technique)
         {
+            AudioManager.Instance.PlaySFX("ButtonClick");
             if (_currentInventory.upgradePoint <= 0)
             {
                 return;
@@ -108,6 +110,8 @@ namespace Assets.Scripts.UI
 
         public async void Save()
         {
+            AudioManager.Instance.PlaySFX("ButtonClick");
+
             var userData = GameManager.Instance.UserData;
 
             var inventory = userData.inventory;
@@ -124,12 +128,5 @@ namespace Assets.Scripts.UI
             }
         }
 
-    }
-
-    public enum Technique
-    {
-        AttackSpeed,
-        Range,
-        Damage
     }
 }

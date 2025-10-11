@@ -54,7 +54,8 @@ namespace Assets.Scripts.UI
 
         private void OnDisable()
         {
-            StopCoroutine(SpinTheSpinner());
+            if (_spinCoroutine != null)
+                StopCoroutine(_spinCoroutine);
         }
     }
 }

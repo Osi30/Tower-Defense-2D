@@ -1,6 +1,5 @@
 ﻿
 
-using Assets.Scripts.LevelManagement.Dtos;
 using Assets.Scripts.Security;
 using UnityEngine;
 
@@ -21,11 +20,13 @@ namespace Assets.Scripts.UI
 
         public void ClosePanel()
         {
+            AudioManager.Instance.PlaySFX("ButtonClick");
             _panel.SetActive(false);
         }
 
         public void Accept()
         {
+            AudioManager.Instance.PlaySFX("ButtonClick");
             SceneController.LoadScene(_level + 1);
         }
 
