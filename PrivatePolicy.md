@@ -47,6 +47,16 @@ Thông tin của bạn chỉ được chia sẻ với các bên thứ ba sau, nh
 
 Chúng tôi đã triển khai các biện pháp bảo mật hợp lý (bao gồm mã hóa mật khẩu và các giao thức bảo mật dữ liệu) để bảo vệ thông tin bạn cung cấp. Tuy nhiên, xin lưu ý rằng không có hệ thống truyền dữ liệu qua Internet nào là an toàn 100%.
 
+### **Yêu cầu Xóa Tài khoản và Dữ liệu**
+
+Người dùng có quyền yêu cầu xóa tài khoản và dữ liệu cá nhân liên quan bất cứ lúc nào.
+
+* **Quy trình Yêu cầu Xóa Tài khoản:** Để bắt đầu quy trình xóa tài khoản, vui lòng gửi email yêu cầu rõ ràng từ địa chỉ email bạn sử dụng để liên hệ với chúng tôi đến địa chỉ hỗ trợ sau:
+    **osigamedev@gmail.com**
+* **Dữ liệu được Xử lý:**
+    * Sau khi nhận được yêu cầu và xác thực danh tính, chúng tôi sẽ **xóa hoàn toàn** thông tin Tên người dùng và Mật khẩu của bạn khỏi hệ thống của chúng tôi trong vòng **30 ngày** làm việc.
+    * Chúng tôi có thể giữ lại các dữ liệu không định danh (như dữ liệu điểm số tổng hợp) cho mục đích vận hành và phân tích nội bộ.
+
 ## 5. Trẻ em dưới 13 tuổi (COPPA)
 
 Trò chơi của chúng tôi được **dành cho người từ 13 tuổi trở lên**. Chúng tôi không cố ý thu thập Thông tin cá nhân từ trẻ em dưới 13 tuổi. Nếu bạn là cha mẹ hoặc người giám hộ và tin rằng con mình dưới 13 tuổi đã cung cấp Thông tin cá nhân cho chúng tôi, vui lòng liên hệ ngay với chúng tôi để chúng tôi có thể xóa dữ liệu đó.
