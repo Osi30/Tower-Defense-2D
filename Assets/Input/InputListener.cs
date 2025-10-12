@@ -17,9 +17,10 @@ public class InputListener : MonoBehaviour
         _executeSkill.performed += ExecuteSkill;
     }
 
-    private void ExecuteSkill(InputAction.CallbackContext _)
+    private void ExecuteSkill(InputAction.CallbackContext context)
     {
-        _skillControl.ActivateSkill();
+        Debug.Log("Touch");
+        _skillControl.ActivateSkill(context.ReadValue<Vector2>());
     }
 
 

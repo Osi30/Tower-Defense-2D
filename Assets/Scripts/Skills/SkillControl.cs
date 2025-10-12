@@ -25,7 +25,7 @@ namespace Assets.Scripts.Skills
             _mainCamera = Camera.main;
         }
 
-        public void ActivateSkill()
+        public void ActivateSkill(Vector2 value)
         {
             if (!_isAiming) return;
 
@@ -47,18 +47,31 @@ namespace Assets.Scripts.Skills
                     AudioManager.Instance.PlaySFX("Boom");
                     _skillUI.LockBoomSkill();
                 }
-                _skills[_chooseSkill].ActivateSkill(_skillPrepare.position);
+
+#if UNITY_ANDROID
+
+                Vector3 targetPosition = _mainCamera.ScreenToWorldPoint(value);
+                targetPosition.z = 0;
+                _skills[_chooseSkill].ActivateSkill(targetPosition);
+#else
+                _skills[_chooseSkill].ActivateSkill( _skillPrepare.position);
+#endif
+
 
             }
         }
 
         public void ChooseSkill(int index)
         {
+            AudioManager.Instance.PlaySFX("ButtonClick");
             _isAiming = true;
             _chooseSkill = index;
+
+#if !UNITY_ANDROID
             Aim();
             _skillPrepare.gameObject.SetActive(true);
             _aimingCoroutine = StartCoroutine(Aiming());
+#endif
         }
 
         private void Aim()

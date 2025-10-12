@@ -54,6 +54,7 @@ namespace Assets.Scripts.UI
 
         private void UpdateTechnique(Inventory inventory)
         {
+            inventory.upgradePoint = inventory.upgradePoint < 0 ? 0 : inventory.upgradePoint;
             _upgradePointText.text = inventory.upgradePoint.ToString();
             _thunderSkill.text = "x" + inventory.thunderSkill.ToString();
             _boomSkill.text = "x" + inventory.boomSkill.ToString();

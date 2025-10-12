@@ -94,12 +94,12 @@ public partial class @PlayerActionControl: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""ExecuteSkill"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""21af4801-1621-4ec4-ab4e-9e5d970462de"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -117,7 +117,7 @@ public partial class @PlayerActionControl: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""58efb24e-eab3-4ced-b5eb-fb13a4faa88e"",
-                    ""path"": ""<Touchscreen>/touch1/tap"",
+                    ""path"": ""<Touchscreen>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

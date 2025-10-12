@@ -43,6 +43,7 @@ public class LevelMapManagerWorld : MonoBehaviour
 
         for (int i = 0; i < currentLevel; i++)
         {
+            if (i == 4) break;
             bool unlocked = i + 1 <= currentLevel;
             nodes[i].Setup(unlocked, currentLevel - 1 == i ? 0 : resultLevels[i].star);
         }
